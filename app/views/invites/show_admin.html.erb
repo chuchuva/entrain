@@ -1,0 +1,8 @@
+
+<h1>Invite</h1>
+
+<p>Send this link to <%= @invite.email %>:</p>
+
+<p><%= "#{@base_url}/invites/#{@invite.invite_key}" %></p>
+
+<%= link_to 'Back', invites_path %>

@@ -3,6 +3,16 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.9'
+gem 'bcrypt', '~> 3.1.7'
+gem 'seed-fu', '~> 2.3.5'
+
+gem 'actionpack-action_caching'
+
+gem 'mail', '~> 2.5.4'
+
+gem 'hiredis'
+gem 'redis', require:  ["redis", "redis/connection/hiredis"]
+
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
