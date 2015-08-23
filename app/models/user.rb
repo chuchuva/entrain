@@ -15,8 +15,6 @@ class User < ActiveRecord::Base
     200
   end
 
-  EMAIL = %r{([^@]+)@([^\.]+)}
-
   def self.new_from_params(params)
     user = User.new
     user.name = params[:name]
