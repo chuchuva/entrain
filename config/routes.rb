@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   delete 'logout'  => 'session#destroy'
   get    'signup'  => 'users#new'
   post   '/users'  => 'users#create'
+  post   '/users/ontraport'    => 'users#create_from_ontraport'
+  get    '/users/set-password' => 'users#set_password'
+  post   '/users/set-password' => 'users#set_password'
 
   resources :invites
   get 'admin/invites/show/:id' => 'invites#show_admin'
