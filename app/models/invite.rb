@@ -26,7 +26,7 @@ class Invite < ActiveRecord::Base
     u = User.find_by("email = ?", Email.downcase(email))
     if u && u.id != self.user_id
       @email_already_exists = true
-      errors.add(:email)
+      errors.add(:email, "already exists")
     end
   end
 
@@ -60,10 +60,10 @@ class Invite < ActiveRecord::Base
     end
 
     if !invite
-      invite = Invite.create!(invited_by: invited_by, email: lower_email)
+      invite = Invite.create(invited_by: invited_by, email: lower_email)
     end
 
-    invite.reload
+    invite.reload unless invite
     invite
   end
 

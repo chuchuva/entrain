@@ -31,19 +31,12 @@ class InvitesController < ApplicationController
   end
 
   # POST /invites
-  # POST /invites.json
   def create
     @invite = Invite.invite_by_email params[:invite][:email], current_user
-
-    respond_to do |format|
-      if @invite
-        format.html { redirect_to action: 'show_admin', id: @invite.id,
-          notice: 'Invite was successfully created.' }
-        format.json { render :show_admin, status: :created, location: @invite }
-      else
-        format.html { render :new }
-        format.json { render json: @invite.errors, status: :unprocessable_entity }
-      end
+    if @invite.id
+      redirect_to action: 'show_admin', id: @invite.id
+    else
+      render :new
     end
   end
 

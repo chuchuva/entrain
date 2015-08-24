@@ -11,4 +11,22 @@ class ActiveSupport::TestCase
     cookie = cookies['_t']
     !cookie.nil? && cookie.length == 32
   end
+
+  # Logs in a test user.
+  def log_in_as(user, options = {})
+    password = options[:password]    || 'password'
+    if integration_test?
+      post login_path, session: { email:       user.email,
+                                  password:    password }
+    else
+      cookies['_t'] = user.auth_token
+    end
+  end
+
+  private
+
+    # Returns true inside an integration test.
+    def integration_test?
+      defined?(post_via_redirect)
+    end
 end

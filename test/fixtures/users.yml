@@ -4,3 +4,4 @@ charlie:
   name: Charlie Coach
   email: charlie@example.com
   password_digest: <%= User.digest('password') %>
+  auth_token: <%= SecureRandom.hex(16) %>
