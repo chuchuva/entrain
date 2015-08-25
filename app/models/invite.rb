@@ -63,7 +63,7 @@ class Invite < ActiveRecord::Base
       invite = Invite.create(invited_by: invited_by, email: lower_email)
     end
 
-    invite.reload unless invite
+    invite.reload unless invite.new_record?
     invite
   end
 
