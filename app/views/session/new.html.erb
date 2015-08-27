@@ -8,9 +8,9 @@
       <%= email_field_tag :email, nil, class: 'form-control' %>
 
       <label for="password">Password</label>
-      <input id="password" name="password" type="password" maxlength="<%= User.max_password_length %>">
+      <input id="password" name="password" type="password" maxlength="<%= User.max_password_length %>" class="form-control">
 
-      <input type="submit" value="Sign in" class: "btn btn-primary">
+      <input type="submit" value="Sign in" class="btn btn-primary">
     <% end %>
 
   </div>

@@ -1,11 +1,11 @@
 <div id="simple-container">
   <%if @error%>
-    <div class='alert alert-error'>
+    <div class="alert alert-danger" role="alert">
       <%= @error %>
     </div>
   <%end%>
   <% if @user.present? and @user.errors.any? %>
-    <div class='alert alert-error'>
+    <div class="alert alert-danger" role="alert">
       <% @user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
