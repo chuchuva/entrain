@@ -35,7 +35,7 @@ class SessionController < ApplicationController
     user = User.find_by_email(email)
     if user && user.authenticate(params[:password])
       log_in user
-      redirect_to root_url
+      redirect_back_or root_url
     else
       invalid_credentials
     end
