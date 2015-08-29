@@ -6,9 +6,7 @@ class EntrainRedis
 
   def self.raw_connection(config = nil)
     config ||= self.config
-    redis_opts = {host: config['host'], port: config['port'], db: config['db']}
-    redis_opts[:password] = config['password'] if config['password']
-    Redis.new(redis_opts)
+    Redis.new(url: config['url'])
   end
 
   def self.config
@@ -17,7 +15,7 @@ class EntrainRedis
 
   def self.url(config=nil)
     config ||= self.config
-    "redis://#{(':' + config['password'] + '@') if config['password']}#{config['host']}:#{config['port']}/#{config['db']}"
+    config['url']
   end
 
   def initialize(config=nil)

@@ -1,21 +1,8 @@
-defaults: &defaults
-  host: <%= GlobalSetting.redis_host %>
-  port: <%= GlobalSetting.redis_port %>
-  password: <%= GlobalSetting.redis_password %>
-  db: <%= GlobalSetting.redis_db %>
-
 development:
-  <<: *defaults
-
-profile:
-  <<: *defaults
+  url: redis://localhost:6379/0
 
 test:
-  <<: *defaults
-  db: 1
-
-staging:
-  <<: *defaults
+  url: redis://localhost:6379/1
 
 production:
-  <<: *defaults
+  url: <%= ENV["REDIS_URL"] %>
