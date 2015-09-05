@@ -50,7 +50,7 @@ InviteRedeemer = Struct.new(:invite, :password) do
     end
 
     def get_existing_user
-      invite.site.find_user_by_email(email: invite.email)
+      invite.site.find_user_by_email(invite.email)
     end
 
     def delete_duplicate_invites

@@ -3,7 +3,7 @@
 valid:
   site: site1
   invite_key: MyString
-  email: MyString
+  email: new-client@example.com
   invited_by_id: 1
   user_id: 1
 
