@@ -1,6 +1,7 @@
 require_dependency 'email'
 
 class Invite < ActiveRecord::Base
+  belongs_to :site
   include Trashable
 
   belongs_to :user
@@ -23,7 +24,7 @@ class Invite < ActiveRecord::Base
   def user_doesnt_already_exist
     @email_already_exists = false
     return if email.blank?
-    u = User.find_by("email = ?", Email.downcase(email))
+    u = site.find_user_by_email(email)
     if u && u.id != self.user_id
       @email_already_exists = true
       errors.add(:email, "already exists")
@@ -45,11 +46,10 @@ class Invite < ActiveRecord::Base
   # Create an invite for a user
   #
   # Return the previously existing invite if already exists. Returns nil if the invite can't be created.
-  def self.invite_by_email(email, invited_by)
+  def self.invite_by_email(site, email, invited_by)
     lower_email = Email.downcase(email)
-    user = User.find_by(email: lower_email)
 
-    invite = Invite.with_deleted
+    invite = site.invites.with_deleted
                    .where(email: lower_email, invited_by_id: invited_by.id)
                    .order('created_at DESC')
                    .first
@@ -60,7 +60,7 @@ class Invite < ActiveRecord::Base
     end
 
     if !invite
-      invite = Invite.create(invited_by: invited_by, email: lower_email)
+      invite = site.invites.create(invited_by: invited_by, email: lower_email)
     end
 
     invite.reload unless invite.new_record?

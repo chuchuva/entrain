@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 valid:
+  site: site1
   invite_key: MyString
   email: MyString
   invited_by_id: 1

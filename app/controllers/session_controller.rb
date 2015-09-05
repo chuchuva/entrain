@@ -16,7 +16,7 @@ class SessionController < ApplicationController
   # NEVER allow this to work in production.
   def become
     raise Entrain::InvalidAccess.new unless Rails.env.development?
-    user = User.find_by_email(params[:session_id])
+    user = @current_site.find_user_by_email(params[:session_id])
     raise "User #{params[:session_id]} not found" if user.blank?
 
     log_on_user(user)
@@ -32,7 +32,7 @@ class SessionController < ApplicationController
 
     email = params[:email].strip
 
-    user = User.find_by_email(email)
+    user = @current_site.find_user_by_email(email)
     if user && user.authenticate(params[:password])
       log_in user
       redirect_back_or root_url
@@ -52,7 +52,7 @@ class SessionController < ApplicationController
     RateLimiter.new(nil, "forgot-password-hr-#{request.remote_ip}", 6, 1.hour).performed!
     RateLimiter.new(nil, "forgot-password-min-#{request.remote_ip}", 3, 1.minute).performed!
 
-    user = User.find_by_or_email(params[:email])
+    user = @current_site.find_user_by_email(params[:email])
     user_presence = user.present?
     if user_presence
       email_token = user.email_tokens.create(email: user.email)

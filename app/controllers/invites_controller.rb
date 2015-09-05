@@ -2,11 +2,11 @@ class InvitesController < ApplicationController
   # GET /invites
   # GET /invites.json
   def index
-    @invites = Invite.all
+    @invites = @current_site.invites
   end
 
   def show
-    invite = Invite.find_by(invite_key: params[:id])
+    invite = @current_site.invites.find_by(invite_key: params[:id])
 
     if invite.present? && !invite.expired? && !invite.destroyed? && !invite.redeemed?
       render
@@ -18,12 +18,12 @@ class InvitesController < ApplicationController
 
   def show_admin
     @base_url = request.base_url
-    @invite = Invite.find(params[:id])
+    @invite = @current_site.invites.find(params[:id])
   end
 
   # GET /invites/new
   def new
-    @invite = Invite.new
+    @invite = @current_site.invites.build
   end
 
   # GET /invites/1/edit
@@ -32,7 +32,8 @@ class InvitesController < ApplicationController
 
   # POST /invites
   def create
-    @invite = Invite.invite_by_email params[:invite][:email], current_user
+    @invite = Invite.invite_by_email @current_site, params[:invite][:email],
+                                     current_user
     if @invite.id
       redirect_to action: 'show_admin', id: @invite.id
     else

@@ -1,6 +1,7 @@
 require_dependency 'email'
 
 class User < ActiveRecord::Base
+  belongs_to :site
 
   before_validation :strip_downcase_email
 
@@ -13,18 +14,6 @@ class User < ActiveRecord::Base
 
   def self.max_password_length
     200
-  end
-
-  def self.new_from_params(params)
-    user = User.new
-    user.name = params[:name]
-    user.email = params[:email]
-    user.password = params[:password]
-    user
-  end
-
-  def self.find_by_email(email)
-    find_by(email: Email.downcase(email))
   end
 
   def self.email_hash(email)

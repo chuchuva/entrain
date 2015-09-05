@@ -11,26 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150823030108) do
+ActiveRecord::Schema.define(version: 20150903200851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "invites", force: true do |t|
-    t.string   "invite_key",     limit: 32, null: false
-    t.string   "email",                     null: false
-    t.integer  "invited_by_id",             null: false
+    t.string   "invite_key",    limit: 32, null: false
+    t.string   "email",                    null: false
+    t.integer  "invited_by_id",            null: false
     t.integer  "user_id"
     t.datetime "redeemed_at"
     t.datetime "deleted_at"
     t.integer  "deleted_by_id"
-    t.datetime "invalidated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "site_id"
+  end
+
+  add_index "invites", ["site_id"], name: "index_invites_on_site_id", using: :btree
+
+  create_table "sites", force: true do |t|
+    t.string   "subdomain"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
-    t.string   "name",                                               null: false
+    t.string   "name"
     t.string   "email",                   limit: 256,                null: false
     t.string   "password_digest",                                    null: false
     t.string   "auth_token",              limit: 32
@@ -39,8 +47,10 @@ ActiveRecord::Schema.define(version: 20150823030108) do
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
     t.boolean  "password_set",                        default: true
+    t.integer  "site_id"
   end
 
   add_index "users", ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
+  add_index "users", ["site_id"], name: "index_users_on_site_id", using: :btree
 
 end

@@ -2,11 +2,11 @@ class UsersController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: [:create_from_ontraport]
 
   def new
-    @user = User.new
+    @user = @current_site.users.build
   end
 
   def create
-    @user = User.new(user_params)
+    @user = @current_site.users.build(user_params)
     if @user.save
       redirect_to root_url
     else
@@ -15,7 +15,9 @@ class UsersController < ApplicationController
   end
 
   def create_from_ontraport
-    user = User.new_from_params(params)
+    user = @current_site.users.build
+    user.name = params[:name]
+    user.email = params[:email]
     user.password = SecureRandom.base64
     user.password_set = false
     if user.save
@@ -29,7 +31,7 @@ class UsersController < ApplicationController
     email = params[:email].strip
     return redirect_to root_url if email.blank?
 
-    user = User.find_by_email(email)
+    user = @current_site.find_user_by_email(email)
     if !user
       render plain: "Something is wrong. User with email address #{email} not found."
       return

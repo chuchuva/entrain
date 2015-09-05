@@ -15,7 +15,7 @@ module SessionHelper
     
     auth_token = cookies[TOKEN_COOKIE]
     if auth_token && auth_token.length == 32
-      @current_user = User.find_by(auth_token: auth_token)
+      @current_user = @current_site.users.find_by(auth_token: auth_token)
     end
 
     @current_user

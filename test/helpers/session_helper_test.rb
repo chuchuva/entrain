@@ -3,6 +3,7 @@ require 'test_helper'
 class SessionHelperTest < ActionView::TestCase
 
   def setup
+    @current_site = sites(:site1)
     @user = users(:charlie)
     log_in @user
   end
