@@ -21,7 +21,9 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert is_logged_in?, 'User is not logged in'
     assert_redirected_to root_url
     follow_redirect!
-    assert_template 'programs/index'
+    assert_redirected_to sites(:site1).programs.first
+    follow_redirect!
+    assert_template 'programs/show'
     assert_select "a[href=?]", login_path, count: 0
     assert_select "a[href=?]", logout_path
     delete logout_path

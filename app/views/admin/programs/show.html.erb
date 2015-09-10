@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @program.name %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @program.slug %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+</p>
+<pre><%= @program.content %></pre>
+
+<%= link_to 'Edit', edit_admin_program_path(@program) %> |
+<%= link_to 'Back', admin_programs_path %>

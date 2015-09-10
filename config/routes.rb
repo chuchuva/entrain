@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'users/new'
 
-  get 'programs/index'
+  get 'programs/:id', to: 'programs#show', as: :program
 
   root 'programs#index'
 
@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get    '/users/set-password' => 'users#set_password'
   post   '/users/set-password' => 'users#set_password'
 
+  namespace :admin do
+    resources :programs
+  end
   resources :invites
   get 'admin/invites/show/:id' => 'invites#show_admin'
 

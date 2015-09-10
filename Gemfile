@@ -14,6 +14,8 @@ gem 'hiredis'
 gem 'redis', require:  ["redis", "redis/connection/hiredis"]
 
 gem 'pg'
+gem 'redcarpet'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass'

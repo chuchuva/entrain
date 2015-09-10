@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  site: site1
+  name: Program One
+  slug: program-one
+  content: MyText
+
+two:
+  site: site1
+  name: Program Two
+  slug: program-two
+  content: MyText
