@@ -6,7 +6,7 @@ class EntrainRedis
 
   def self.raw_connection(config = nil)
     config ||= self.config
-    Redis.new(url: config['url'])
+    Redis.new(url: config['url'], path: config['path'], db: config['db'])
   end
 
   def self.config
