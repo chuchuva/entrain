@@ -33,3 +33,9 @@ profile:
   host_names:
     - "localhost"
 
+production:
+  adapter: postgresql
+  database: entrain_production
+  min_messages: warning
+  pool: 8
+  timeout: 5000
