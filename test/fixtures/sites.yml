@@ -2,3 +2,6 @@
 
 site1:
   subdomain: site1
+
+anothersite:
+  subdomain: anothersite

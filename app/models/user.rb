@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   before_validation :strip_downcase_email
 
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: { scope: :site_id }
   validates :email, email: true, if: :email_changed?
   validate :password_validator
   validates :name, presence: true, if: :name_changed?
