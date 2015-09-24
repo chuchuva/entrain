@@ -2,6 +2,7 @@ require_dependency 'email'
 
 class User < ActiveRecord::Base
   belongs_to :site
+  has_many :orders
 
   before_validation :strip_downcase_email
 

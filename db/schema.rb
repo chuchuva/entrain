@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150908204420) do
+ActiveRecord::Schema.define(version: 20150923202626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,19 @@ ActiveRecord::Schema.define(version: 20150908204420) do
   end
 
   add_index "invites", ["site_id"], name: "index_invites_on_site_id", using: :btree
+
+  create_table "orders", force: true do |t|
+    t.integer  "site_id"
+    t.integer  "program_id"
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.decimal  "amount",     precision: 15, scale: 2
+    t.string   "pay_method"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "programs", force: true do |t|
     t.integer  "site_id"

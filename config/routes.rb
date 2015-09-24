@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   post   '/users/ontraport'    => 'users#create_from_ontraport'
   get    '/users/set-password' => 'users#set_password'
   post   '/users/set-password' => 'users#set_password'
+  get    'purchase/thank-you' => 'orders#thank_you'
+  get    'purchase/:program_id' => 'orders#new'
+  post   'purchase/:program_id', to: 'orders#create', as: :orders
 
   namespace :admin do
     resources :programs
