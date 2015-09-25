@@ -5,6 +5,7 @@ tags
 dump.rdb
 /.vagrant
 /.vagrantfile
+secrets.yml
 
 # Ignore bundler config.
 /.bundle

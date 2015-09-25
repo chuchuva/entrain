@@ -3,8 +3,8 @@
 one:
   site: site1
   program: one
-  first_name: MyString
-  last_name: MyString
+  first_name: John
+  last_name: Smith
   email: MyString
   amount: 9.99
   pay_method: card

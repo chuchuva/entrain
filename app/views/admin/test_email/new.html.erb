@@ -1,0 +1,17 @@
+<h1>Test Email</h1>
+
+
+<%= form_tag do %>
+  <div class="field">
+    <%= label_tag(:email, "To") %>
+    <%= text_field_tag(:email) %>
+  </div>
+  <div class="field">
+    <%= label_tag(:subject, "Subject") %>
+    <%= text_field_tag(:subject) %>
+  </div>
+  <div class="actions">
+    <%= submit_tag("Send") %>
+  </div>
+<% end %>
+

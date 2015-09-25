@@ -1,0 +1,31 @@
+<h1>New Order</h1>
+
+<p>New order has been submitted!</p>
+
+<table>
+  <tr>
+    <td>Name:</td>
+    <td><%= @order.first_name %> <%= @order.last_name %></td>
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td><%= @order.email %></td>
+  </tr>
+  <tr>
+    <td>Purchased at:</td>
+    <td><%= @order.created_at %></td>
+  </tr>
+  <tr>
+    <td>Program:</td>
+    <td><%= @order.program.name %></td>
+  </tr>
+  <tr>
+    <td>Amount:</td>
+    <td><%= number_to_currency(@order.amount) %></td>
+  </tr>
+</table>
+
+<p>
+  High five!<br>
+  The Happy Entrain Server
+</p>

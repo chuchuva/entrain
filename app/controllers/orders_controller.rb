@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
     @order.amount = 777;
     program = @current_site.programs.find(params[:program_id])
     @order.program = program;
-    @stripe_publishable_key = "todo: key"
+    @stripe_publishable_key = Rails.application.secrets.stripe_publishable_key
   end
 
   def create
@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
     @order.email = params[:stripeEmail]
     @order.pay_method = :card
 
-    Stripe.api_key = "todo: key"
+    Stripe.api_key = Rails.application.secrets.stripe_secret_key
     charge = Stripe::Charge.create(
       :source      => params[:stripeToken],
       :amount      => (@order.amount * 100).to_i, # Stripe expects cents
@@ -36,6 +36,7 @@ class OrdersController < ApplicationController
       :currency    => 'usd'
     )
     @order.save
+    AdminMailer.new_order(@order).deliver
     redirect_to :purchase_thank_you
   rescue Stripe::CardError => e
     @order.errors[:base] << e.message

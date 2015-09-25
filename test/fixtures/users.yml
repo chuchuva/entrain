@@ -6,3 +6,12 @@ charlie:
   email: charlie@example.com
   password_digest: <%= User.digest('password') %>
   auth_token: <%= SecureRandom.hex(16) %>
+  admin: true
+
+stew:
+  site: site1
+  name: Stewart Student
+  email: stew@example.com
+  password_digest: <%= User.digest('password') %>
+  auth_token: <%= SecureRandom.hex(16) %>
+  admin: false

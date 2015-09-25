@@ -8,4 +8,8 @@ class Site < ActiveRecord::Base
     users.find_by(email: Email.downcase(email))
   end
 
+  def admins
+    users.where(admin: true)
+  end
+
 end

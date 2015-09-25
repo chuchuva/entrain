@@ -9,4 +9,13 @@ class ApplicationController < ActionController::Base
     def set_current_site
       @current_site = Site.find_by_subdomain!(request.subdomains.first)
     end
+
+    # Confirms a logged-in user.
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
 end

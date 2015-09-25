@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :programs
+    get 'test-email', to: 'test_email#new'
+    post 'test-email', to: 'test_email#send_email'
   end
   resources :invites
   get 'admin/invites/show/:id' => 'invites#show_admin'
