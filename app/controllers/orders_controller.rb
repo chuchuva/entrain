@@ -6,7 +6,6 @@ class OrdersController < ApplicationController
     @order.amount = 777;
     program = @current_site.programs.find(params[:program_id])
     @order.program = program;
-    @stripe_publishable_key = Rails.application.secrets.stripe_publishable_key
   end
 
   def create
@@ -28,7 +27,7 @@ class OrdersController < ApplicationController
     @order.email = params[:stripeEmail]
     @order.pay_method = :card
 
-    Stripe.api_key = Rails.application.secrets.stripe_secret_key
+    Stripe.api_key = @current_site.setting(:stripe_secret_key)
     charge = Stripe::Charge.create(
       :source      => params[:stripeToken],
       :amount      => (@order.amount * 100).to_i, # Stripe expects cents

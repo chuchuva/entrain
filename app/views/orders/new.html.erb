@@ -93,7 +93,7 @@
 
       <script
         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="<%= @stripe_publishable_key %>"
+        data-key="<%= @current_site.setting(:stripe_publishable_key) %>"
         data-name="<%= @order.program.name %>"
         data-amount="<%= (@order.amount * 100).to_i %>"
         data-locale="auto">

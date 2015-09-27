@@ -39,7 +39,7 @@ InviteRedeemer = Struct.new(:invite, :password) do
 
     def mark_invite_redeemed
       Invite.where(['id = ? AND redeemed_at IS NULL AND created_at >= ?',
-        invite.id, SiteSetting.invite_expiry_days.days.ago]).update_all(
+        invite.id, 30.days.ago]).update_all(
         'redeemed_at = CURRENT_TIMESTAMP')
     end
 

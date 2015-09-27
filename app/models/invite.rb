@@ -36,7 +36,7 @@ class Invite < ActiveRecord::Base
   end
 
   def expired?
-    created_at < SiteSetting.invite_expiry_days.days.ago
+    created_at < 30.days.ago
   end
 
   def redeem(password)

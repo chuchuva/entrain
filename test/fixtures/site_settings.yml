@@ -1,0 +1,9 @@
+color_for_site1:
+  site: site1
+  name: favorite_color
+  value: blue
+
+color_for_anothersite:
+  site: anothersite
+  name: favorite_color
+  value: green
