@@ -83,9 +83,6 @@ volumes:
   - volume:
       host: /var/run/postgresql
       guest: /postgresql-run
-  - volume:
-      host: /var/www/entrain/integration/discourse
-      guest: /entrain-integration
 
 ## The docker manager plugin allows you to one-click upgrade Discourse
 ## http://discourse.example.com/admin/docker
@@ -96,13 +93,30 @@ hooks:
         cmd:
           - mkdir -p plugins
           - git clone https://github.com/discourse/docker_manager.git
+  before_bundle_exec:
+    - file:
+        path: $home/config/multisite.yml
+        contents: |
+         secondsite:
+           adapter: postgresql
+           host: /postgresql-run
+           password: TODO: password
+           database: discourse_stashahealthcatalyst
+           pool: 25
+           timeout: 5000
+           db_id: 2
+           host_names:
+             - stashahealthcatalyst.entrainhq.com
+
+  after_bundle_exec:
+    - exec: cd /var/www/discourse && sudo -E -u discourse bundle exec rake multisite:migrate
 
 ## Remember, this is YAML syntax - you can only have one block with a name
 run:
   - exec: echo "Beginning of custom commands"
 
-  - exec:
-      cmd: cp /integration-discourse/default_current_user_provider.rb /var/www/entrain/integration/discourse/default_current_user_provider.rb
+  - exec: cp /shared/entrain-integration/default_current_user_provider.rb /var/www/discourse/lib/auth/default_current_user_provider.rb
+
   - exec:
       cd: $home
       cmd:
