@@ -1,0 +1,104 @@
+<% provide(:title, 'Purchase') %>
+
+<link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
+<style>
+  h1, h2, h3
+  {
+    font-family: 'Oxygen', sans-serif;
+    color: #3a96b8;
+    font-weight: bold;
+  }
+  h1
+  {
+    text-align: center;
+  }
+
+  a { 
+    color: #af4340;
+    text-decoration: underline;
+  }
+  a:visited { 
+    color: #af4340;
+  }
+  a:hover {
+    color: #8f3734;
+    background: none;
+  }
+
+  p, ol, ul, td {
+    color: #999;
+    font-family: 'Oxygen', sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  input, textarea, select, .uneditable-input {
+    border: 1px solid #bbb;
+    width: 100%;
+    margin-bottom: 15px;
+    @include box_sizing;
+  }
+
+  input {
+    height: auto !important;
+  }
+
+  .price
+  {
+    font-size: 28px;
+    font-weight: bold;
+    color: #999;
+    line-height: 1;
+    margin: 0.5em 0;
+  }
+
+  .old-price
+  {
+    color: #ccc;
+    text-decoration: line-through;
+  }
+
+</style>
+
+
+<h1>Success Sync</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <img src="http://www.stashahealthcatalyst.com/uploads/1/6/0/0/16009490/s978542615303557132_p42_i2_w472.jpeg" alt="" />
+    <div class="price">
+      <span class="old-price">$1,279.00</span>
+      <%= number_to_currency(@order.amount) %>
+    </div>
+    <p>
+      Join us for an incredible opportunity to create ease and abundance in your life AND business!
+    </p>
+    <p>Registration will be limited.</p>
+    <p>
+      To join via Payment Plan Click here: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BZMS6PBY9ESKS">PayPal</a>
+      <br />
+      This is a 6 month payment plan option.
+    </p>
+
+    <hr />
+
+    <%= form_for(@order) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, class: 'form-control' %>
+
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, class: 'form-control' %>
+
+      <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="<%= @current_site.setting(:stripe_publishable_key) %>"
+        data-name="<%= @order.program.name %>"
+        data-amount="<%= (@order.amount * 100).to_i %>"
+        data-locale="auto">
+      </script>
+    <% end %>
+    <br><br><br>
+  </div>
+</div>

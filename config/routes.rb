@@ -15,8 +15,10 @@ Rails.application.routes.draw do
   get    '/users/set-password' => 'users#set_password'
   post   '/users/set-password' => 'users#set_password'
   get    'purchase/thank-you' => 'orders#thank_you'
-  get    'purchase/:program_id' => 'orders#new'
+  get    'purchase/:program_id', to: 'orders#new', as: :new_order
   post   'purchase/:program_id', to: 'orders#create', as: :orders
+  get    'purchase/:program_id/paypal-confirm' => 'orders#paypal_confirm',
+            as: :paypal_confirm
 
   namespace :admin do
     resources :programs

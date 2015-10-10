@@ -6,4 +6,9 @@ class OrdersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should get thank you page" do
+    get :thank_you
+    assert_response :success
+  end
+
 end
