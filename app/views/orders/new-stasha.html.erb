@@ -10,7 +10,7 @@
     <img src="http://www.stashahealthcatalyst.com/uploads/1/6/0/0/16009490/s978542615303557132_p42_i2_w472.jpeg" alt="" />
     <div class="price">
       <span class="old-price">$1,279.00</span>
-      <%= number_to_currency(@order.amount) %>
+      <%= number_to_currency(@program.price) %>
     </div>
     <p>
       Join us for an incredible opportunity to create ease and abundance in your life AND business!
@@ -37,7 +37,7 @@
         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
         data-key="<%= @current_site.setting(:stripe_publishable_key) %>"
         data-name="<%= @order.program.name %>"
-        data-amount="<%= (@order.amount * 100).to_i %>"
+        data-amount="<%= (@program.price * 100).to_i %>"
         data-locale="auto">
       </script>
     <% end %>
