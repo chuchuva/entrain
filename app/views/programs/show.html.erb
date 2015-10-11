@@ -1,0 +1,5 @@
+<% if @custom_css %>
+  <link href="<%= @custom_css %>" rel="stylesheet" type="text/css">
+<% end %>
+
+<%= markdown @program.content %>

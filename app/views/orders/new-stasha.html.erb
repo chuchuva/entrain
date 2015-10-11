@@ -1,65 +1,7 @@
 <% provide(:title, 'Purchase') %>
-
-<link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
-<style>
-  h1, h2, h3
-  {
-    font-family: 'Oxygen', sans-serif;
-    color: #3a96b8;
-    font-weight: bold;
-  }
-  h1
-  {
-    text-align: center;
-  }
-
-  a { 
-    color: #af4340;
-    text-decoration: underline;
-  }
-  a:visited { 
-    color: #af4340;
-  }
-  a:hover {
-    color: #8f3734;
-    background: none;
-  }
-
-  p, ol, ul, td {
-    color: #999;
-    font-family: 'Oxygen', sans-serif;
-    font-size: 18px;
-    line-height: 1.5;
-  }
-
-  input, textarea, select, .uneditable-input {
-    border: 1px solid #bbb;
-    width: 100%;
-    margin-bottom: 15px;
-    @include box_sizing;
-  }
-
-  input {
-    height: auto !important;
-  }
-
-  .price
-  {
-    font-size: 28px;
-    font-weight: bold;
-    color: #999;
-    line-height: 1;
-    margin: 0.5em 0;
-  }
-
-  .old-price
-  {
-    color: #ccc;
-    text-decoration: line-through;
-  }
-
-</style>
-
+<% if @custom_css %>
+  <link href="<%= @custom_css %>" rel="stylesheet" type="text/css">
+<% end %>
 
 <h1>Success Sync</h1>
 

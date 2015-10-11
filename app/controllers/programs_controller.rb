@@ -6,6 +6,7 @@ class ProgramsController < ApplicationController
   end
 
   def show
+    @custom_css = @current_site.setting(:custom_css)
     @program = @current_site.programs.find(params[:id])
   end
 

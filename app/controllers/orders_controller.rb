@@ -3,6 +3,7 @@ require "stripe"
 
 class OrdersController < ApplicationController
   def new
+    @custom_css = @current_site.setting(:custom_css)
     @program = @current_site.programs.find(params[:program_id])
     @order = @current_site.orders.build
     @order.program = @program;
@@ -79,6 +80,7 @@ class OrdersController < ApplicationController
   end
 
   def thank_you
+    @custom_css = @current_site.setting(:custom_css)
   end
 
   private
