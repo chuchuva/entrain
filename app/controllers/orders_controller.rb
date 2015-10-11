@@ -7,7 +7,6 @@ class OrdersController < ApplicationController
     @program = @current_site.programs.find(params[:program_id])
     @order = @current_site.orders.build
     @order.program = @program;
-    @order.amount = 777;
     @order.pay_method = :card;
     if @current_site.subdomain == "stashahealthcatalyst"
       render "new-stasha"
@@ -17,8 +16,8 @@ class OrdersController < ApplicationController
   def create
     @program = @current_site.programs.find(params[:program_id])
     @order = @current_site.orders.build(order_params)
-    @order.amount = 777;
     @order.program = @program;
+    @order.amount = @program.price;
     if params[:stripeEmail]
       @order.email = params[:stripeEmail]
     end
@@ -46,14 +45,14 @@ class OrdersController < ApplicationController
   # Redirects to PayPal website
   def paypal()
     gateway = PayPal.gateway(@current_site)
-    response = gateway.setup_purchase(77700,
+    response = gateway.setup_purchase((@order.amount * 100).to_i,
       :ip                => request.remote_ip,
       :return_url        => paypal_confirm_url,
       :cancel_return_url => new_order_url,
       :items             => [ { :name => @program.name,
                                 :number => @program.id,
                                 :quantity => "1",
-                                :amount   => 77700,
+                                :amount   => (@order.amount * 100).to_i,
                                 :description => "",
                                 :category => "Digital" } ] 
     )
