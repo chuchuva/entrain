@@ -21,12 +21,15 @@ Rails.application.routes.draw do
             as: :paypal_confirm
 
   namespace :admin do
-    resources :programs
+    resources :programs do
+      resources :pages
+    end
     get 'test-email', to: 'test_email#new'
     post 'test-email', to: 'test_email#send_email'
   end
   resources :invites
   get 'admin/invites/show/:id' => 'invites#show_admin'
+  get ':program_slug/:page_slug/:id', to: 'pages#show', as: :page
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  site: site1
+  program: one
+  slug: one
+  title: One
+  content: MyText
+
+two:
+  site: site1
+  program: one
+  slug: two
+  title: Two
+  content: MyText
