@@ -46,21 +46,23 @@ class Auth::DefaultCurrentUserProvider
     current_user = nil
 
     if auth_token && auth_token.length == 32
+      entrain_user = nil
       RailsMultisite::ConnectionManagement.with_connection("default") do
         entrain_user = Entrain::User.find_by(auth_token: auth_token)
-        if entrain_user
-          current_user = User.find_by(email: entrain_user.email)
-          if !current_user
-            user_params = {
-              email: entrain_user.email,
-              name:  User.suggest_name(entrain_user.name || entrain_user.email),
-              username: UserNameSuggester.suggest(entrain_user.name || 
-                                                  entrain_user.email),
-              active: true
-            }
-            current_user = User.create!(user_params)
-            current_user.enqueue_welcome_message('welcome_user')
-          end
+      end
+
+      if entrain_user
+        current_user = User.find_by(email: entrain_user.email)
+        if !current_user
+          user_params = {
+            email: entrain_user.email,
+            name:  User.suggest_name(entrain_user.name || entrain_user.email),
+            username: UserNameSuggester.suggest(entrain_user.name ||
+                                                entrain_user.email),
+            active: true
+          }
+          current_user = User.create!(user_params)
+          current_user.enqueue_welcome_message('welcome_user')
         end
       end
     end
