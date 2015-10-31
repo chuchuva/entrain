@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post   '/users/ontraport'    => 'users#create_from_ontraport'
   get    '/users/set-password' => 'users#set_password'
   post   '/users/set-password' => 'users#set_password'
+  resources :password_resets, only: [:new, :create, :edit, :update]
   get    'purchase/thank-you' => 'orders#thank_you'
   get    'purchase/:program_id', to: 'orders#new', as: :new_order
   post   'purchase/:program_id', to: 'orders#create', as: :orders

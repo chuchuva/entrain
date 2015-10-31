@@ -15,6 +15,7 @@ module Entrain
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    require 'entrain'
     require 'entrain_redis'
     # Use redis for our cache
     config.cache_store = EntrainRedis.new_redis_store

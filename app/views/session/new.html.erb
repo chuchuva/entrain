@@ -8,6 +8,7 @@
       <%= email_field_tag :email, nil, class: 'form-control' %>
 
       <label for="password">Password</label>
+      <%= link_to "(forgot password)", new_password_reset_path %>
       <input id="password" name="password" type="password" maxlength="<%= User.max_password_length %>" class="form-control">
 
       <input type="submit" value="Sign in" class="btn btn-primary">
