@@ -1,10 +1,11 @@
 require_dependency 'email'
 
 class User < ActiveRecord::Base
-  attr_accessor :reset_token
+  attr_accessor :activation_token, :reset_token
   belongs_to :site
   has_many :orders
 
+  before_create :create_activation_digest
   before_validation :strip_downcase_email
 
   validates :email, presence: true, uniqueness: { scope: :site_id }
@@ -59,7 +60,16 @@ class User < ActiveRecord::Base
     digest = send("#{attribute}_digest")
     return false if digest.nil?
     BCrypt::Password.new(digest).is_password?(token)
-  end  
+  end
+
+  def password_was_set!
+    update_attributes(password_set: true, password_set_at: Time.zone.now)
+  end
+
+  # Sends activation email.
+  def send_activation_email
+    UserMailer.account_activation(self).deliver
+  end
 
   # Sets the password reset attributes.
   def create_reset_digest
@@ -78,7 +88,7 @@ class User < ActiveRecord::Base
     reset_sent_at < 2.hours.ago
   end
 
-  protected
+  private
 
     def strip_downcase_email
       if self.email
@@ -87,4 +97,9 @@ class User < ActiveRecord::Base
       end
     end
 
+    # Creates and assigns the activation token and digest.
+    def create_activation_digest
+      self.activation_token  = User.new_token
+      self.activation_digest = User.digest(activation_token)
+    end
 end

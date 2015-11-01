@@ -24,8 +24,7 @@ class ActiveSupport::TestCase
   def log_in_as(user, options = {})
     password = options[:password]    || 'password'
     if integration_test?
-      post login_path, session: { email:       user.email,
-                                  password:    password }
+      post login_path, email: user.email, password: password
     else
       cookies['_t'] = user.auth_token
     end

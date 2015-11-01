@@ -53,4 +53,31 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
     assert_redirected_to root_url
   end
+
+  test "password reset should also activate" do
+    @user.toggle!(:password_set)
+    get new_password_reset_path
+    assert_template 'password_resets/new'
+    post password_resets_path, password_reset: { email: @user.email }
+    assert_not_equal @user.reset_digest, @user.reload.reset_digest
+    assert_equal 1, ActionMailer::Base.deliveries.size
+    assert_not flash.empty?
+    assert_redirected_to login_url
+    # Password reset form
+    user = assigns(:user)
+    assert !user.password_set?
+    get edit_password_reset_path(user.reset_token, email: user.email)
+    assert_template 'password_resets/edit'
+    assert_select "input[name=email][type=hidden][value=?]", user.email
+    patch password_reset_path(user.reset_token),
+          email: user.email,
+          user: { password:              "foobar",
+                  password_confirmation: "foobar" }
+    assert @user.reload.password_set?
+    assert is_logged_in?
+    assert_not flash.empty?
+    assert_redirected_to root_url
+  end
+
+
 end

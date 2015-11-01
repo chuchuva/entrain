@@ -5,6 +5,8 @@ charlie:
   name: Charlie Coach
   email: charlie@example.com
   password_digest: <%= User.digest('password') %>
+  password_set: true
+  password_set_at: <%= Time.zone.now %>
   auth_token: <%= SecureRandom.hex(16) %>
   admin: true
 
@@ -13,5 +15,7 @@ stew:
   name: Stewart Student
   email: stew@example.com
   password_digest: <%= User.digest('password') %>
+  password_set: true
+  password_set_at: <%= Time.zone.now %>
   auth_token: <%= SecureRandom.hex(16) %>
   admin: false

@@ -12,12 +12,13 @@ InviteRedeemer = Struct.new(:invite, :password) do
   end
 
   def self.create_user_from_invite(invite, password)
-    site = invite.site;
+    site = invite.site
     user_exists = site.find_user_by_email(invite.email)
     return user_exists if user_exists
 
     user = site.users.build(email: invite.email, password: password)
     user.save!
+    user.password_was_set!
 
     user
   end

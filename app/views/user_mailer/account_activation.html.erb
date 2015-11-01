@@ -1,0 +1,8 @@
+<p>Hi <%= @user.name %>,</p>
+
+<p>
+  Welcome to the program! Click on the link below to set your password:
+</p>
+
+<%= link_to "Set password", edit_account_activation_url(
+                              @user.activation_token, email: @user.email) %>

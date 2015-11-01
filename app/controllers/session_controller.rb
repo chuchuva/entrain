@@ -33,7 +33,7 @@ class SessionController < ApplicationController
     email = params[:email].strip
 
     user = @current_site.find_user_by_email(email)
-    if user && user.authenticate(params[:password])
+    if user && user.password_set? && user.authenticate(params[:password]) 
       log_in user
       redirect_back_or root_url
     else

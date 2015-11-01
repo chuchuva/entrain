@@ -10,12 +10,13 @@ class Order < ActiveRecord::Base
       user.name = first_name + " " + last_name
       user.email = email
       user.password = SecureRandom.base64
-      user.password_set = false
       user.save
     end
 
     self.user = user
     save
+    
+    user.send_activation_email
     AdminMailer.new_order(self).deliver
   end
 end

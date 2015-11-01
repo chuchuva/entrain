@@ -7,9 +7,11 @@ class UsersController < ApplicationController
 
   def create
     @user = @current_site.users.build(user_params)
+    @user.password = SecureRandom.base64
     if @user.save
-      log_in @user
-      redirect_to root_url
+      @user.send_activation_email
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to login_url
     else
       render 'new'
     end
@@ -61,8 +63,7 @@ class UsersController < ApplicationController
 
   private
 
-  def user_params
-    params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation)
-  end
+    def user_params
+      params.require(:user).permit(:name, :email)
+    end
 end
