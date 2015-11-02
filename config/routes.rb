@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :programs do
       resources :pages
+      resources :texts
     end
     get 'test-email', to: 'test_email#new'
     post 'test-email', to: 'test_email#send_email'

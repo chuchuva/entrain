@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
   def new
     @custom_css = @current_site.setting(:custom_css)
     @program = @current_site.programs.find(params[:program_id])
+    @sales_text = @program.text(:sales)
     @order = @current_site.orders.build
     @order.program = @program;
     @order.pay_method = :card;

@@ -1,0 +1,23 @@
+<h1>Listing texts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @texts.each do |text| %>
+      <tr>
+        <td><%= text.text_type %></td>
+        <td><%= link_to 'Show', [:admin, @program, text] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Text', new_admin_program_text_path %>
