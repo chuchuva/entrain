@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
       :description => @program.name,
       :currency    => 'usd'
     )
-    @order.create!
+    @order.submit!
     redirect_to :purchase_thank_you
   rescue Stripe::CardError => e
     @order.errors[:base] << e.message
@@ -75,7 +75,7 @@ class OrdersController < ApplicationController
                 amount: details.params["amount"]
               })
     order.program = program;
-    order.create!
+    order.submit!
     redirect_to :purchase_thank_you
   end
 

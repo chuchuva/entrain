@@ -11,7 +11,7 @@ class OrderTest < ActiveSupport::TestCase
     order.program = program
     assert_nil order.id
     assert_difference 'User.count', 1 do
-      order.create!
+      order.submit!
     end
     assert_not_nil order.id
     assert_equal 'john@example.com', order.user.email
