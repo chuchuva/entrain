@@ -22,6 +22,11 @@ class OrdersController < ApplicationController
     if params[:stripeEmail]
       @order.email = params[:stripeEmail]
     end
+
+    if @order.invalid?
+      render :new
+      return
+    end
     
     if @order.pay_method && @order.pay_method.to_sym == :paypal
       paypal
