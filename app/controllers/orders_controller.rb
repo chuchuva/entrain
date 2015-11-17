@@ -62,7 +62,13 @@ class OrdersController < ApplicationController
                                 :description => "",
                                 :category => "Digital" } ] 
     )
-    redirect_to gateway.redirect_url_for(response.token)
+
+    if response.success?
+      redirect_to gateway.redirect_url_for(response.token)
+    else
+      @order.errors[:base] << response.message
+      render :new
+    end
   end
 
   def paypal_confirm
