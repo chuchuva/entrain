@@ -1,9 +1,7 @@
 class PayPal
   def self.gateway(site)
-    if site.setting(:paypal_sandbox) == 'true'
-      ActiveMerchant::Billing::Base.mode = :test
-    end
     paypal_options = {
+      :test => site.setting(:paypal_sandbox) == 'true',
       :login => site.setting(:paypal_user),
       :password => site.setting(:paypal_password),
       :signature => site.setting(:paypal_signature)
