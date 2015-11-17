@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       resources :pages
       resources :texts
     end
+    resources :settings
     get 'test-email', to: 'test_email#new'
     post 'test-email', to: 'test_email#send_email'
   end
