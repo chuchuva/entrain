@@ -6,6 +6,6 @@ class PayPal
       :password => site.setting(:paypal_password),
       :signature => site.setting(:paypal_signature)
     }
-    ActiveMerchant::Billing::PaypalDigitalGoodsGateway.new(paypal_options)
+    ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
   end
 end

@@ -59,8 +59,7 @@ class OrdersController < ApplicationController
                                 :number => @program.id,
                                 :quantity => "1",
                                 :amount   => (@order.amount * 100).to_i,
-                                :description => "",
-                                :category => "Digital" } ] 
+                                :description => "" } ] 
     )
 
     if response.success?
