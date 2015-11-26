@@ -10,4 +10,9 @@ class SiteTest < ActiveSupport::TestCase
     assert_equal @user, @site.find_user_by_email("charlie@example.com")
     assert_equal nil, @site.find_user_by_email("someone-not-registered@example.com")
   end
+
+  test "currency defaults to USD" do
+    assert_equal "USD", @site.currency
+    assert_equal "$", @site.currencySign
+  end
 end

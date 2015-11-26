@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
       :source      => params[:stripeToken],
       :amount      => (@order.amount * 100).to_i, # Stripe expects cents
       :description => @program.name,
-      :currency    => 'usd'
+      :currency    => @current_site.currency
     )
     @order.submit!
     redirect_to :purchase_thank_you
@@ -52,14 +52,15 @@ class OrdersController < ApplicationController
   def paypal()
     gateway = PayPal.gateway(@current_site)
     response = gateway.setup_purchase((@order.amount * 100).to_i,
-      :ip                => request.remote_ip,
-      :return_url        => paypal_confirm_url,
-      :cancel_return_url => new_order_url,
-      :items             => [ { :name => @program.name,
-                                :number => @program.id,
-                                :quantity => "1",
-                                :amount   => (@order.amount * 100).to_i,
-                                :description => "" } ] 
+      currency:          @current_site.currency,
+      ip:                request.remote_ip,
+      return_url:        paypal_confirm_url,
+      cancel_return_url: new_order_url,
+      items:             [ { :name => @program.name,
+                             :number => @program.id,
+                             :quantity => "1",
+                             :amount   => (@order.amount * 100).to_i,
+                             :description => "" } ] 
     )
 
     if response.success?

@@ -20,4 +20,12 @@ class Site < ActiveRecord::Base
     users.where(admin: true)
   end
 
+  def currency
+    setting('currency') || "USD";
+  end
+
+  def currencySign
+    currency == "EUR" ? '€' : '$';
+  end
+
 end

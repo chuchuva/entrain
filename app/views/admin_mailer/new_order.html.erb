@@ -21,7 +21,8 @@
   </tr>
   <tr>
     <td>Amount:</td>
-    <td><%= number_to_currency(@order.amount) %></td>
+    <td><%= number_to_currency(@order.amount, 
+              unit: @current_site.currencySign) %></td>
   </tr>
 </table>
 

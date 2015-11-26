@@ -7,9 +7,10 @@ class AdminMailer < ActionMailer::Base
   #   en.admin_mailer.new_order.subject
   #
   def new_order(order)
+    @current_site = order.site
     @order = order
 
-    mail to: @order.site.admins.pluck(:email), subject: 
+    mail to: @current_site.admins.pluck(:email), subject: 
       "New order from #{order.first_name} #{order.last_name}"
   end
 end
