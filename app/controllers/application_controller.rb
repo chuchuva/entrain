@@ -7,6 +7,12 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   include SessionHelper
+  
+  helper_method :site_logo_url
+
+  def site_logo_url
+    @site_logo_url ||= @current_site.setting("logo_url")
+  end
 
   private
     def set_current_site

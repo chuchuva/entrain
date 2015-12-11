@@ -9,6 +9,13 @@
 <body>
 <header class="navbar navbar-static-top navbar-inverse">
   <div class="container">
+    <% if site_logo_url.present? %>
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">
+          <img alt="" src="<%= site_logo_url %>">
+        </a>
+      </div>
+    <% end %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
