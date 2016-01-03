@@ -47,14 +47,14 @@ ActiveRecord::Schema.define(version: 20151102203711) do
   create_table "pages", force: true do |t|
     t.integer  "site_id"
     t.integer  "program_id"
-    t.string   "slug"
+    t.string   "slug",       null: false
     t.string   "title"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "pages", ["site_id"], name: "index_pages_on_site_id", using: :btree
+  add_index "pages", ["program_id"], name: "index_pages_on_program_id", using: :btree
 
   create_table "programs", force: true do |t|
     t.integer  "site_id"

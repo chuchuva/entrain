@@ -9,7 +9,7 @@ class Order < ActiveRecord::Base
   def submit!
     return false if invalid?
     user = site.find_user_by_email(email)
-    if !user
+    if !user && pay_method != :bank_transfer
       user = site.users.build
       user.name = first_name + " " + last_name
       user.email = email

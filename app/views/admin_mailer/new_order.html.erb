@@ -24,6 +24,10 @@
     <td><%= number_to_currency(@order.amount, 
               unit: @current_site.currencySign) %></td>
   </tr>
+  <tr>
+    <td>Payment Method:</td>
+    <td><%= @order.pay_method %></td>
+  </tr>
 </table>
 
 <p>

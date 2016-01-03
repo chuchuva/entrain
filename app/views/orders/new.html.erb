@@ -62,8 +62,14 @@
         <%= f.radio_button :pay_method, :paypal %>
         <%= f.label :pay_method_paypal, image_tag(
           "https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png",
-          alt: "Credit card") %>
+          alt: "PayPal") %>
       </div>
+      <% if @current_site.setting(:bank_transfer_enabled) %>
+        <div>
+          <%= f.radio_button :pay_method, :bank_transfer %>
+          <%= f.label :pay_method_bank_transfer, "Bank Transfer" %>
+        </div>
+      <% end %>
 
       <div class="actions">
         <%= f.submit "Continue", class: "btn btn-lg btn-primary" %>

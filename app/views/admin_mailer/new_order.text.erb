@@ -2,12 +2,13 @@
 
 New order has been submitted!
 
-Name:         <%= @order.first_name %> <%= @order.last_name %>
-Email:        <%= @order.email %>
-Purchased at: <%= @order.created_at %>
-Program:      <%= @order.program.name %>
-Amount:       <%= number_to_currency(@order.amount, 
+Name:           <%= @order.first_name %> <%= @order.last_name %>
+Email:          <%= @order.email %>
+Purchased at:   <%= @order.created_at %>
+Program:        <%= @order.program.name %>
+Amount:         <%= number_to_currency(@order.amount, 
                     unit: @current_site.currencySign) %>
+Payment Method: <%= @order.pay_method %>
 
 High five!
 The Happy Entrain Server

@@ -28,6 +28,13 @@ class OrdersController < ApplicationController
       return
     end
     
+    if @order.pay_method && @order.pay_method.to_sym == :bank_transfer &&
+       @current_site.setting(:bank_transfer_enabled)
+      order.submit!
+      redirect_to :bank_transfer_instructions
+      return
+    end
+    
     if @order.pay_method && @order.pay_method.to_sym == :paypal
       paypal
       return
@@ -49,7 +56,7 @@ class OrdersController < ApplicationController
 
   # Sets up PayPal Express Checkout
   # Redirects to PayPal website
-  def paypal()
+  def paypal
     gateway = PayPal.gateway(@current_site)
     response = gateway.setup_purchase((@order.amount * 100).to_i,
       currency:          @current_site.currency,
@@ -91,6 +98,10 @@ class OrdersController < ApplicationController
   end
 
   def thank_you
+    @custom_css = @current_site.setting(:custom_css)
+  end
+
+  def bank_transfer_instructions
     @custom_css = @current_site.setting(:custom_css)
   end
 
