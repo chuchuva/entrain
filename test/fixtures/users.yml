@@ -19,3 +19,13 @@ stew:
   password_set_at: <%= Time.zone.now %>
   auth_token: <%= SecureRandom.hex(16) %>
   admin: false
+
+another_coach:
+  site: anothersite
+  name: Another Coach
+  email: Another.Coach@example.com
+  password_digest: <%= User.digest('password') %>
+  password_set: true
+  password_set_at: <%= Time.zone.now %>
+  auth_token: <%= SecureRandom.hex(16) %>
+  admin: true

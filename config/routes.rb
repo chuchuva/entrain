@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   post   'purchase/:program_id', to: 'orders#create', as: :orders
   get    'purchase/:program_id/paypal-confirm' => 'orders#paypal_confirm',
             as: :paypal_confirm
+  get    'purchase/:program_id/bank-transfer-instructions',
+            to: 'orders#bank_transfer_instructions', as: :bank_transfer_instructions
 
   namespace :admin do
     resources :programs do

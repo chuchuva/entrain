@@ -7,3 +7,9 @@ color_for_anothersite:
   site: anothersite
   name: favorite_color
   value: green
+
+bank_setting:
+  site: anothersite
+  name: bank_transfer_enabled
+  value: true
+

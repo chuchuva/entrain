@@ -11,3 +11,9 @@ two:
   name: Program Two
   slug: program-two
   content: MyText
+
+program_for_another_site:
+  site: anothersite
+  name: Another Program
+  slug: another-program
+  content: MyText

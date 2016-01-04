@@ -30,8 +30,8 @@ class OrdersController < ApplicationController
     
     if @order.pay_method && @order.pay_method.to_sym == :bank_transfer &&
        @current_site.setting(:bank_transfer_enabled)
-      order.submit!
-      redirect_to :bank_transfer_instructions
+      @order.submit!
+      redirect_to bank_transfer_instructions_path
       return
     end
     
@@ -103,6 +103,8 @@ class OrdersController < ApplicationController
 
   def bank_transfer_instructions
     @custom_css = @current_site.setting(:custom_css)
+    @program = @current_site.programs.find(params[:program_id])
+    @instructions = @program.text(:bank_transfer_instructions)
   end
 
   private
