@@ -5,7 +5,6 @@
     <tr>
       <th>Slug</th>
       <th>Title</th>
-      <th>Content</th>
       <th></th>
     </tr>
   </thead>
@@ -15,8 +14,7 @@
       <tr>
         <td><%= page.slug %></td>
         <td><%= page.title %></td>
-        <td><%= page.content %></td>
-        <td><%= link_to 'Show', [:admin, @program, page] %></td>
+        <td><%= link_to 'Show', [:admin, page] %></td>
       </tr>
     <% end %>
   </tbody>

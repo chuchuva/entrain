@@ -10,12 +10,10 @@
   <%= @page.title %>
 </p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @page.content %>
-</p>
+<h3>Content</h3>
+<pre><%= @page.content %></pre>
 
-<%= link_to 'Edit', edit_admin_program_page_path(@page.program_id, @page) %> |
-<%= link_to 'Delete', [:admin, @page.program, @page],
+<%= link_to 'Edit', edit_admin_page_path(@page) %> |
+<%= link_to 'Delete', [:admin, @page],
       method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', admin_program_pages_path(@page.program_id) %>

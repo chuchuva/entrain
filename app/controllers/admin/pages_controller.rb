@@ -1,6 +1,6 @@
 class Admin::PagesController < ApplicationController
   before_action :logged_in_user
-  before_action :set_program
+  before_action :set_program, only: [:index, :new, :create]
   before_action :set_page, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/programs/1/pages
@@ -8,7 +8,7 @@ class Admin::PagesController < ApplicationController
     @pages = @current_site.programs.find(params[:program_id]).pages
   end
 
-  # GET /admin/programs/1/pages/1
+  # GET /admin/pages/1
   def show
   end
 
@@ -17,7 +17,7 @@ class Admin::PagesController < ApplicationController
     @page = @program.pages.build
   end
 
-  # GET /admin/programs/1/pages/1/edit
+  # GET /admin/pages/1/edit
   def edit
   end
 
@@ -27,13 +27,13 @@ class Admin::PagesController < ApplicationController
     @page.site_id = @program.site_id
 
     if @page.save
-      redirect_to [:admin, @program, @page], notice: 'Page was successfully created.'
+      redirect_to [:admin, @page], notice: 'Page was successfully created.'
     else
       render :new
     end
   end
 
-  # PATCH/PUT /admin/programs/1/pages/1
+  # PATCH/PUT /admin/pages/1
   def update
     if @page.update(page_params)
       redirect_to [:admin, @program, @page], notice: 'Page was successfully updated.'
@@ -42,10 +42,12 @@ class Admin::PagesController < ApplicationController
     end
   end
 
-  # DELETE /admin/programs/1/pages/1
+  # DELETE /admin/pages/1
   def destroy
+    program = @page.program
     @page.destroy
-    redirect_to admin_program_pages_url(@program), notice: 'Page was successfully destroyed.'
+    redirect_to admin_program_pages_url(program),
+      notice: 'Page was successfully destroyed.'
   end
 
   private
@@ -55,7 +57,7 @@ class Admin::PagesController < ApplicationController
     end
 
     def set_page
-      @page = @program.pages.find(params[:id])
+      @page = @current_site.pages.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

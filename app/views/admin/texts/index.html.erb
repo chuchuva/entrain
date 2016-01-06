@@ -11,8 +11,7 @@
   <tbody>
     <% @texts.each do |text| %>
       <tr>
-        <td><%= text.text_type %></td>
-        <td><%= link_to 'Show', [:admin, @program, text] %></td>
+        <td><%= link_to text.text_type, [:admin, text] %></td>
       </tr>
     <% end %>
   </tbody>

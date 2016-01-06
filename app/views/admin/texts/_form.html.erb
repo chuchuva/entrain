@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :text_type %><br>
-    <%= f.text_field :text_type %>
+    <%= f.text_field :text_type, class: "form-control" %>
   </div>
   <div class="field">
     <%= f.label :value %><br>
-    <%= f.text_area :value %>
+    <%= f.text_area :value, size: "80x20", class: "form-control" %>
   </div>
   <div class="actions">
     <%= f.submit %>

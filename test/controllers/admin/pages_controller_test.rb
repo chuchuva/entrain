@@ -24,7 +24,7 @@ class Admin::PagesControllerTest < ActionController::TestCase
         content: @page.content, slug: @page.slug, title: @page.title }
     end
 
-    assert_redirected_to admin_program_page_path(@program, assigns(:page))
+    assert_redirected_to admin_page_path(assigns(:page))
   end
 
   test "should show page" do
@@ -40,7 +40,7 @@ class Admin::PagesControllerTest < ActionController::TestCase
   test "should update page" do
     patch :update, id: @page, program_id: @program, page: {
       content: @page.content, slug: @page.slug, title: @page.title }
-    assert_redirected_to admin_program_page_path(@program, assigns(:page))
+    assert_redirected_to admin_page_path(assigns(:page))
   end
 
   test "should destroy page" do

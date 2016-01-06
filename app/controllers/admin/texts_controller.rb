@@ -1,6 +1,6 @@
 class Admin::TextsController < ApplicationController
   before_action :logged_in_user
-  before_action :set_program
+  before_action :set_program, only: [:index, :new, :create]
   before_action :set_text, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/programs/1/texts
@@ -8,7 +8,7 @@ class Admin::TextsController < ApplicationController
     @texts = @program.texts
   end
 
-  # GET /admin/programs/1/texts/1
+  # GET /admin/texts/1
   def show
   end
 
@@ -17,7 +17,7 @@ class Admin::TextsController < ApplicationController
     @text = @program.texts.build
   end
 
-  # GET /admin/programs/1/texts/1/edit
+  # GET /admin/texts/1/edit
   def edit
   end
 
@@ -27,25 +27,27 @@ class Admin::TextsController < ApplicationController
     @text.site_id = @program.site_id
 
     if @text.save
-      redirect_to [:admin, @program, @text], notice: 'Text was successfully created.'
+      redirect_to admin_program_texts_url(@program), notice: 'Text was successfully created.'
     else
       render :new
     end
   end
 
-  # PATCH/PUT /admin/programs/1/texts/1
+  # PATCH/PUT /admin/texts/1
   def update
     if @text.update(text_params)
-      redirect_to [:admin, @program, @text], notice: 'Text was successfully updated.'
+      redirect_to [:admin, @text], notice: 'Text was successfully updated.'
     else
       render :edit
     end
   end
 
-  # DELETE /admin/programs/1/texts/1
+  # DELETE /admin/texts/1
   def destroy
+    program = @text.program
     @text.destroy
-    redirect_to admin_program_texts_url(@program), notice: 'Text was successfully destroyed.'
+    redirect_to admin_program_texts_url(program),
+      notice: 'Text was successfully destroyed.'
   end
 
   private
@@ -55,7 +57,7 @@ class Admin::TextsController < ApplicationController
     end
 
     def set_text
-      @text = @program.texts.find(params[:id])
+      @text = @current_site.texts.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

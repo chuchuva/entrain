@@ -5,12 +5,11 @@
   <%= @text.text_type %>
 </p>
 
-<p>
-  <strong>Value:</strong>
-  <%= @text.value %>
-</p>
+<h3>Value</h3>
+<pre><%= @text.value %></pre>
 
-<%= link_to 'Edit', edit_admin_program_text_path(@text.program_id, @text) %> |
-<%= link_to 'Delete', [:admin, @text.program, @text],
+
+<%= link_to 'Edit', edit_admin_text_path(@text) %> |
+<%= link_to 'Delete', [:admin, @text],
       method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', admin_program_texts_path(@text.program_id) %>
