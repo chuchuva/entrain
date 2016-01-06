@@ -1,0 +1,22 @@
+<h1>Email Templates</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @email_templates.each do |email| %>
+      <tr>
+        <td><%= link_to email.email_type, [:admin, email] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Email Template', new_admin_program_email_template_path %>

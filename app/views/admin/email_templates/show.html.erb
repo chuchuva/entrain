@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @email_template.email_type %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @email_template.subject %>
+</p>
+
+<h3>Body</h3>
+<pre><%= @email_template.body %></pre>
+
+<%= link_to 'Edit', edit_admin_email_template_path(@email_template) %> |
+<%= link_to 'Delete', [:admin, @email_template],
+      method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back', admin_program_email_templates_path(@email_template.program_id) %>

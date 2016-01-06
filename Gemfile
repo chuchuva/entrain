@@ -15,6 +15,7 @@ gem 'redis', require:  ["redis", "redis/connection/hiredis"]
 
 gem 'pg'
 gem 'redcarpet'
+gem 'liquid'
 gem 'activemerchant'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 

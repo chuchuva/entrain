@@ -67,8 +67,8 @@ class User < ActiveRecord::Base
   end
 
   # Sends activation email.
-  def send_activation_email
-    UserMailer.account_activation(self).deliver
+  def send_activation_email(program)
+    UserMailer.account_activation(self, program).deliver
   end
 
   # Sets the password reset attributes.

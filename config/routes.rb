@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     resources :programs, shallow: true do
       resources :pages
       resources :texts
+      resources :emails, as: 'email_templates', controller: 'email_templates'
     end
     resources :settings
     get 'test-email', to: 'test_email#new'

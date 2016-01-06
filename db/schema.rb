@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151102203711) do
+ActiveRecord::Schema.define(version: 20160106002759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "email_templates", force: true do |t|
+    t.integer  "site_id"
+    t.integer  "program_id"
+    t.string   "email_type"
+    t.string   "subject"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "email_templates", ["program_id"], name: "index_email_templates_on_program_id", using: :btree
 
   create_table "invites", force: true do |t|
     t.string   "invite_key",    limit: 32, null: false

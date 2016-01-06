@@ -3,6 +3,7 @@ class Site < ActiveRecord::Base
   has_many :programs
   has_many :texts
   has_many :pages
+  has_many :email_templates
   has_many :invites
   has_many :orders
   has_many :site_settings

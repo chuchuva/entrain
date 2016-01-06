@@ -1,0 +1,29 @@
+<%= form_for([:admin, @program, @email_template]) do |f| %>
+  <% if @email_template.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@email_template.errors.count, "error") %> prohibited this email template from being saved:</h2>
+
+      <ul>
+      <% @email_template.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :email_type %><br>
+    <%= f.text_field :email_type, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :subject %><br>
+    <%= f.text_field :subject, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br>
+    <%= f.text_area :body, size: "80x20", class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
