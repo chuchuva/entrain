@@ -7,7 +7,8 @@ class OrderTest < ActiveSupport::TestCase
     order = site.orders.build({
       first_name: 'John',
       last_name: 'New',
-      email: 'john@example.com'})
+      email: 'john@example.com',
+      pay_method: :card})
     order.program = program
     assert_nil order.id
     assert_difference 'User.count', 1 do

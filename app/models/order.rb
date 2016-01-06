@@ -5,6 +5,7 @@ class Order < ActiveRecord::Base
   validates :email, presence: true, uniqueness: { scope: :program_id, message:
     'taken. Oops, it looks like you have purchased this program already. ' + 
     'Please contact us for assistance with getting access to the program.'}
+  validates_presence_of :pay_method
 
   def submit!
     return false if invalid?
