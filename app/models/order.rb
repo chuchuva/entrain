@@ -18,6 +18,9 @@ class Order < ActiveRecord::Base
       return false unless user.save
       user.send_activation_email(program)
     end
+    if pay_method.to_sym == :bank_transfer
+      UserMailer.bank_transfer_instructions(self).deliver
+    end
 
     self.user = user
     save
