@@ -17,4 +17,9 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.password_reset(user)
   end
 
+  # Preview this email at http://localhost:3000/rails/mailers/user_mailer/bank_transfer_instructions
+  def bank_transfer_instructions
+    UserMailer.bank_transfer_instructions(Order.first)
+  end
+
 end
