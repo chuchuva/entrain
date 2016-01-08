@@ -5,11 +5,15 @@
 <% end %>
 
 <div class="thank-you">
-  <h1>Thank You!</h1>
+  <% if @text %>
+    <%= markdown @text %>
+  <% else %>
+    <h1>Thank You!</h1>
 
-  <p>You will receive email shortly confirming your registration.</p>
+    <p>You will receive email shortly confirming your registration.</p>
 
-  <p>
-    <small>Please contact us if you don't receive email in 1 day.</small>
-  </p>
+    <p>
+      <small>Please contact us if you don't receive email in 1 day.</small>
+    </p>
+  <% end %>
 </div>

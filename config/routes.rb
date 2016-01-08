@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   post   '/users/set-password' => 'users#set_password'
   resources :account_activations, only: [:edit, :update]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  get    'purchase/thank-you' => 'orders#thank_you'
+  get    'purchase/:program_id/thank-you', to: 'orders#thank_you', as: :thank_you
   get    'purchase/:program_id', to: 'orders#new', as: :new_order
   post   'purchase/:program_id', to: 'orders#create', as: :orders
   get    'purchase/:program_id/paypal-confirm' => 'orders#paypal_confirm',

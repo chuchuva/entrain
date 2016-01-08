@@ -48,7 +48,7 @@ class OrdersController < ApplicationController
       :currency    => @current_site.currency
     )
     @order.submit!
-    redirect_to :purchase_thank_you
+    redirect_to thank_you_path
   rescue Stripe::CardError => e
     @order.errors[:base] << e.message
     render :new
@@ -94,11 +94,14 @@ class OrdersController < ApplicationController
               })
     order.program = program;
     order.submit!
-    redirect_to :purchase_thank_you
+    redirect_to thank_you_path
   end
 
+  # /purchase/1/thank-you
   def thank_you
     @custom_css = @current_site.setting(:custom_css)
+    @program = @current_site.programs.find(params[:program_id])
+    @text = @program.text(:thank_you)
   end
 
   def bank_transfer_instructions
