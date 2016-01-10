@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       resources :pages
       resources :texts
       resources :emails, as: 'email_templates', controller: 'email_templates'
+      resources :coupons
     end
     resources :settings
     get 'test-email', to: 'test_email#new'

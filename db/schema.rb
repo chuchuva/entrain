@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160106002759) do
+ActiveRecord::Schema.define(version: 20160110192646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "coupons", force: true do |t|
+    t.integer  "site_id"
+    t.integer  "program_id"
+    t.string   "code"
+    t.decimal  "price",      precision: 15, scale: 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "coupons", ["program_id", "code"], name: "index_coupons_on_program_id_and_code", unique: true, using: :btree
 
   create_table "email_templates", force: true do |t|
     t.integer  "site_id"

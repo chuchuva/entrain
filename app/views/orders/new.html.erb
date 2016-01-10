@@ -9,7 +9,7 @@
   <div class="col-md-6 col-md-offset-3">
     <h1><%= @program.name %></h1>
     <div class="price">
-      <%= number_to_currency(@program.price, unit: @current_site.currencySign) %>
+      <%= number_to_currency(@price, unit: @current_site.currencySign) %>
     </div>
     <p>Register now.</p>
 
@@ -70,6 +70,7 @@
           <%= f.label :pay_method_bank_transfer, "Bank Transfer" %>
         </div>
       <% end %>
+      <%= hidden_field_tag :code, params[:code] %>
 
       <div class="actions">
         <%= f.submit "Continue", class: "btn btn-lg btn-primary" %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  site: site1
+  program: one
+  code: ABC
+  price: 9.99
+
+two:
+  site: site1
+  program: one
+  code: DEF
+  price: 1.99

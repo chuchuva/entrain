@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
   def new
     @custom_css = @current_site.setting(:custom_css)
     @program = @current_site.programs.find(params[:program_id])
+    @price = @program.apply_coupon(params[:code])
     @sales_text = @program.text(:sales)
     @order = @current_site.orders.build
     @order.program = @program;
@@ -16,9 +17,11 @@ class OrdersController < ApplicationController
 
   def create
     @program = @current_site.programs.find(params[:program_id])
+    @price = @program.apply_coupon(params[:code])
+    @sales_text = @program.text(:sales)
     @order = @current_site.orders.build(order_params)
     @order.program = @program;
-    @order.amount = @program.price;
+    @order.amount = @program.apply_coupon(params[:code]);
     if params[:stripeEmail]
       @order.email = params[:stripeEmail]
     end

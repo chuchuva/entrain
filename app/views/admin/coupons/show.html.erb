@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @coupon.code %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @coupon.price %>
+</p>
+
+<%= link_to 'Edit', edit_admin_coupon_path(@coupon) %> |
+<%= link_to 'Back', admin_program_coupons_path(@coupon.program_id) %>

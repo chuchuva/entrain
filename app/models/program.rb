@@ -3,6 +3,7 @@ class Program < ActiveRecord::Base
   has_many :pages
   has_many :texts
   has_many :email_templates
+  has_many :coupons
   has_many :orders
 
   def text(text_type)
@@ -12,5 +13,11 @@ class Program < ActiveRecord::Base
 
   def email_template(email_type)
     text = email_templates.find_by(email_type: email_type)
+  end
+
+  def apply_coupon(code)
+    return price if code.blank?
+    coupon = coupons.find_by(code: code)
+    coupon ? coupon.price : price
   end
 end

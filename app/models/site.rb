@@ -6,6 +6,7 @@ class Site < ActiveRecord::Base
   has_many :email_templates
   has_many :invites
   has_many :orders
+  has_many :coupons
   has_many :site_settings
 
   def setting(name)
