@@ -93,10 +93,15 @@ class OrdersController < ApplicationController
                 email: details.email,
                 first_name: details.params["first_name"],
                 last_name: details.params["last_name"],
-                amount: details.params["amount"]
+                amount: details.params["amount"],
+                pay_method: :paypal
               })
     order.program = program;
-    order.submit!
+
+    if !order.submit!
+      return render plain: order.errors.full_messages
+    end
+
     redirect_to thank_you_path
   end
 
