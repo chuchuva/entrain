@@ -88,7 +88,24 @@ class OrdersController < ApplicationController
     if !details.success?
       return render plain: details.message
     end
+
     program = @current_site.programs.find(details.params["number"])
+    response = PayPal.gateway(@current_site).purchase(
+        (details.params["amount"].to_f * 100).to_i,
+        currency:          @current_site.currency,
+        ip:                request.remote_ip,
+        token:             params[:token],
+        payer_id:          params[:PayerID],
+        items:             [ { :name => program.name,
+                               :number => program.id,
+                               :quantity => "1",
+                               :amount   => (details.params["amount"].to_f * 100).to_i,
+                               :description => "" } ] 
+        )
+    if !response.success?
+      return render plain: response.message
+    end
+
     order = @current_site.orders.build({
                 email: details.email,
                 first_name: details.params["first_name"],
