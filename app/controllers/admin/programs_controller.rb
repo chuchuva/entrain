@@ -1,5 +1,4 @@
-class Admin::ProgramsController < ApplicationController
-  before_action :logged_in_user
+class Admin::ProgramsController < Admin::AdminController
   before_action :set_program, only: [:show, :edit, :update, :destroy]
 
   # GET admin/programs

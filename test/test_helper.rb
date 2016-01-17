@@ -22,7 +22,7 @@ class ActiveSupport::TestCase
 
   # Logs in a test user.
   def log_in_as(user, options = {})
-    password = options[:password]    || 'password'
+    password = options[:password] || 'password'
     if integration_test?
       post login_path, email: user.email, password: password
     else

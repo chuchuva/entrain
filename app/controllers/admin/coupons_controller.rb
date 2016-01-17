@@ -1,5 +1,4 @@
-class Admin::CouponsController < ApplicationController
-  before_action :logged_in_user
+class Admin::CouponsController < Admin::AdminController
   before_action :set_program, only: [:index, :new, :create]
   before_action :set_coupon, only: [:show, :edit, :update, :destroy]
 

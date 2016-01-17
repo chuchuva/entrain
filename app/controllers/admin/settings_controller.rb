@@ -1,5 +1,4 @@
-class Admin::SettingsController < ApplicationController
-  before_action :logged_in_user
+class Admin::SettingsController < Admin::AdminController
   before_action :set_setting, only: [:show, :edit, :update, :destroy]
 
   # GET admin/settings

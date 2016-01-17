@@ -1,6 +1,4 @@
-class Admin::TestEmailController < ApplicationController
-  before_action :logged_in_user
-
+class Admin::TestEmailController < Admin::AdminController
   def new
   end
 
