@@ -21,3 +21,14 @@
 
 en:
   hello: "Hello world"
+  pay_method: "Payment Method"
+  card_number: "Card Number"
+  expiration: "Expiration"
+
+  helpers:
+    label:
+      order:
+        pay_method_bank_transfer: "Bank Transfer"
+    submit:
+      order:
+        create: "Continue"

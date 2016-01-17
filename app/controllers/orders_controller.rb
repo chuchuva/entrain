@@ -2,6 +2,8 @@ require "paypal"
 require "stripe"
 
 class OrdersController < ApplicationController
+before_action :set_locale
+ 
   def new
     @custom_css = @current_site.setting(:custom_css)
     @program = @current_site.programs.find(params[:program_id])
@@ -139,4 +141,9 @@ class OrdersController < ApplicationController
     def order_params
       params.require(:order).permit(:first_name, :last_name, :email, :pay_method)
     end
+    
+    def set_locale
+      I18n.locale = @current_site.setting(:locale) || I18n.default_locale
+    end
+
 end

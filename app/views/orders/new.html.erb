@@ -30,7 +30,7 @@
       <%= f.label :email %>
       <%= f.text_field :email, class: 'form-control' %>
 
-      <h4>Payment Method</h4>
+      <h4><%= t('pay_method') %></h4>
       <div>
         <%= f.radio_button :pay_method, :card %>
         <%= f.label :pay_method_card, image_tag("cards.png", alt: "Credit card") %>
@@ -38,14 +38,14 @@
         <div class="card">
           <div class="form-row">
             <label>
-              <span>Card Number</span>
+              <span><%= t('card_number') %></span>
               <input type="text" size="20" data-stripe="number"/>
             </label>
           </div>
 
           <div class="form-row">
             <label>
-              <span>Expiration (MM/YYYY)</span>
+              <span><%= t('expiration') %> (MM/YYYY)</span>
               <input type="text" size="2" data-stripe="exp-month"/>
             </label>
             <span> / </span>
@@ -69,13 +69,13 @@
       <% if @current_site.setting(:bank_transfer_enabled) %>
         <div>
           <%= f.radio_button :pay_method, :bank_transfer %>
-          <%= f.label :pay_method_bank_transfer, "Bank Transfer" %>
+          <%= f.label :pay_method_bank_transfer %>
         </div>
       <% end %>
       <%= hidden_field_tag :code, params[:code] %>
 
       <div class="actions">
-        <%= f.submit "Continue", class: "btn btn-lg btn-primary" %>
+        <%= f.submit class: "btn btn-lg btn-primary" %>
       </div>
     <% end %>
     <br><br><br>

@@ -1,0 +1,14 @@
+de:
+  hello: "Hallo Welt"
+  pay_method: "Zahlungsmethode"
+  card_number: "Kartennummer"
+  expiration: "Gültig bis"
+  helpers:
+    label:
+      order:
+        first_name: "Vorname"
+        last_name: "Nachname"
+        pay_method_bank_transfer: "Bank Überweisung"
+    submit:
+      order:
+        create: "Weiter"
