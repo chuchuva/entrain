@@ -1,5 +1,6 @@
 class Admin::SendInviteController < Admin::AdminController
   def new
+    @invite = @current_site.invites.build
   end
 
   def sendit
