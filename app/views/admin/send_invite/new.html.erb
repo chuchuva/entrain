@@ -1,0 +1,26 @@
+<h1>Send Invite</h1>
+
+<%= form_tag do %>
+  <% if @invite.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@invite.errors.count, "error") %> prohibited this invite from being saved:</h2>
+
+      <ul>
+      <% @invite.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= label_tag(:email) %>
+    <%= text_field_tag(:email) %>
+  </div>
+  <div class="field">
+    <%= label_tag(:first_name) %>
+    <%= text_field_tag(:first_name) %>
+  </div>
+  <div class="actions">
+    <%= submit_tag("Send Invite") %>
+  </div>
+<% end %>

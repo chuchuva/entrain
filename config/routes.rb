@@ -32,6 +32,10 @@ Rails.application.routes.draw do
       resources :coupons
     end
     resources :settings
+    
+    get :invite, to: 'send_invite#new'
+    post :invite, to: 'send_invite#sendit'
+
     get 'test-email', to: 'test_email#new'
     post 'test-email', to: 'test_email#send_email'
   end

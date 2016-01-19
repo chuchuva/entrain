@@ -22,4 +22,8 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.bank_transfer_instructions(Order.first)
   end
 
+  def invite
+    UserMailer.invite(Invite.first, 'John')
+  end
+
 end
