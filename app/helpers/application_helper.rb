@@ -7,4 +7,11 @@ module ApplicationHelper
     markdown = Redcarpet::Markdown.new(renderer, autolink: true)
     markdown.render(text).html_safe
   end
+
+  def liquid(template, context)
+    return nil if template.blank?
+    text = Liquid::Template.parse(template).render(context)
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true)
+    markdown.render(text).html_safe
+  end  
 end
