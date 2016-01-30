@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160110192646) do
+ActiveRecord::Schema.define(version: 20160129223925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,14 +70,25 @@ ActiveRecord::Schema.define(version: 20160110192646) do
   create_table "pages", force: true do |t|
     t.integer  "site_id"
     t.integer  "program_id"
-    t.string   "slug",       null: false
+    t.string   "slug"
     t.string   "title"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "pages", ["program_id"], name: "index_pages_on_program_id", using: :btree
+  add_index "pages", ["site_id"], name: "index_pages_on_site_id", using: :btree
+
+  create_table "program_participants", force: true do |t|
+    t.integer  "site_id"
+    t.integer  "program_id"
+    t.integer  "user_id"
+    t.boolean  "active",     default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "program_participants", ["program_id", "user_id"], name: "index_program_participants_on_program_id_and_user_id", unique: true, using: :btree
 
   create_table "programs", force: true do |t|
     t.integer  "site_id"

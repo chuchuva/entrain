@@ -9,4 +9,9 @@ class UserTest < ActiveSupport::TestCase
   test "authenticated? should return false for a user with nil digest" do
     assert_not @user.authenticated?(:activation, '')
   end
+
+  test "should check access to program" do
+    program = programs(:one)
+    assert_not @user.has_access?(program)
+  end
 end

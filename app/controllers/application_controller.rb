@@ -32,6 +32,11 @@ class ApplicationController < ActionController::Base
       render inline: '<h1>Access Denied</h1>' unless current_user && current_user.admin?
     end
 
+    def ensure_program_access(program)
+      render 'programs/no_access' unless current_user && 
+                                         current_user.has_access?(program)
+    end
+
     def make_action_mailer_use_request_host_and_protocol
       ActionMailer::Base.default_url_options[:protocol] = request.protocol
       ActionMailer::Base.default_url_options[:host] = request.host_with_port

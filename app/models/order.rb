@@ -10,15 +10,17 @@ class Order < ActiveRecord::Base
   def submit!
     return false if invalid?
     user = site.find_user_by_email(email)
-    if !user && pay_method.to_sym != :bank_transfer
-      user = site.users.build
-      user.name = first_name + " " + last_name
-      user.email = email
-      user.password = SecureRandom.base64
-      return false unless user.save
-      user.send_activation_email(program)
-    end
-    if pay_method.to_sym == :bank_transfer
+    if pay_method.to_sym != :bank_transfer
+      if !user
+        user = site.users.build
+        user.name = first_name + " " + last_name
+        user.email = email
+        user.password = SecureRandom.base64
+        return false unless user.save
+        user.send_activation_email(program)
+      end
+      program.add_user(user)
+    else
       UserMailer.bank_transfer_instructions(self).deliver
     end
 

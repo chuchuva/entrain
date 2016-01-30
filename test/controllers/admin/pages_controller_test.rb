@@ -3,7 +3,7 @@ require 'test_helper'
 class Admin::PagesControllerTest < ActionController::TestCase
   setup do
     @program = programs(:one)
-    @page = pages(:one)
+    @page = pages(:module1_1)
     log_in_as(users(:charlie))
   end
 

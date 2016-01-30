@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   attr_accessor :activation_token, :reset_token
   belongs_to :site
   has_many :orders
+  has_many :program_participants, -> { where active: true }
+  has_many :programs, through: :program_participants
 
   before_create :create_activation_digest
   before_validation :strip_downcase_email
@@ -87,6 +89,11 @@ class User < ActiveRecord::Base
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
   end
+
+  # Returns true if the current user has access to the program
+  def has_access?(program)
+    programs.include?(program)
+  end  
 
   private
 

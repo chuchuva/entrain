@@ -5,6 +5,8 @@ class Program < ActiveRecord::Base
   has_many :email_templates
   has_many :coupons
   has_many :orders
+  has_many :program_participants, -> { where active: true }
+  has_many :users, through: :program_participants
 
   def text(text_type)
     text = texts.find_by(text_type: text_type)
@@ -19,5 +21,14 @@ class Program < ActiveRecord::Base
     return price if code.blank?
     coupon = coupons.find_by(code: code)
     coupon ? coupon.price : price
+  end
+
+  def add_user(user)
+    program_participants.create(site_id: site_id, user_id: user.id)
+  end
+
+  def remove_user(user)
+    program_participants.find_by(user_id: user.id).update_attribute(
+      :active, false)
   end
 end

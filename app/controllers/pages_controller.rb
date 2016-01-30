@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   def show
     @custom_css = @current_site.setting(:custom_css)
     @page = @current_site.pages.find(params[:id])
+    ensure_program_access(@page.program)
   end
 
 end

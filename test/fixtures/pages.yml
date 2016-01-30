@@ -1,15 +1,22 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+module1_1:
   site: site1
   program: one
-  slug: one
+  slug: module1
   title: One
   content: MyText
 
-two:
+module1_2:
   site: site1
   program: one
-  slug: two
+  slug: module2
   title: Two
+  content: MyText
+
+lesson2_1:
+  site: site1
+  program: two
+  slug: lesson1
+  title: Lesson One from Program Two
   content: MyText

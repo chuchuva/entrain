@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UsersLoginTest < ActionDispatch::IntegrationTest
   def setup
-    @user = users(:charlie)
+    @user = users(:stew)
   end
   
   test "login with invalid information" do
@@ -21,7 +21,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert is_logged_in?, 'User is not logged in'
     assert_redirected_to root_url
     follow_redirect!
-    assert_redirected_to sites(:site1).programs.first
+    assert_redirected_to programs(:one)
     follow_redirect!
     assert_template 'programs/show'
     assert_select "a[href=?]", login_path, count: 0

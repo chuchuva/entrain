@@ -19,6 +19,18 @@ class AccessSiteTest < ActionDispatch::IntegrationTest
     get program_path(@program)
     assert_template 'programs/show'
 
+    get page_path(program_slug: 'a', page_slug: 'b', id: pages(:module1_1))
+    assert_template 'pages/show'
+    assert_select "h1", {count: 0, text: "No Access"}
+
+    get program_path(programs(:two))
+    assert_template 'programs/no_access'
+    assert_select "h1", "No Access"
+
+    get page_path(program_slug: 'a', page_slug: 'b', id: pages(:lesson2_1))
+    assert_template 'programs/no_access'
+    assert_select "h1", "No Access"
+
     get admin_programs_path
     assert_select "h1", "Access Denied"
 
