@@ -2,7 +2,11 @@ class ProgramsController < ApplicationController
   before_action :logged_in_user
   def index
     program = current_user.programs.first
-    redirect_to program if program
+    if program 
+      redirect_to program
+    else
+      render :no_access
+    end
   end
 
   def show

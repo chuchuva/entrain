@@ -1,0 +1,26 @@
+<h1>Invites</h1>
+
+<%= link_to 'Send an Invite', new_admin_program_invite_path %>
+
+<br><br>
+
+<table>
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Email</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @invites.each do |invite| %>
+      <tr>
+        <td><%= invite.first_name %></td>
+        <td><%= invite.email %></td>
+        <td><%= link_to 'Show', [:admin, invite] %></td>
+        <td><%= link_to 'Destroy', [:admin, invite], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

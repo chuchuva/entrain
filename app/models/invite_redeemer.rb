@@ -4,6 +4,8 @@ InviteRedeemer = Struct.new(:invite, :password) do
     Invite.transaction do
       if invite_was_redeemed?
         process_invitation
+        invited_user = get_invited_user
+        invite.program.add_user invited_user
         return invited_user
       end
     end
@@ -16,7 +18,9 @@ InviteRedeemer = Struct.new(:invite, :password) do
     user_exists = site.find_user_by_email(invite.email)
     return user_exists if user_exists
 
-    user = site.users.build(email: invite.email, password: password)
+    user = site.users.build(email: invite.email, 
+                            password: password,
+                            name: invite.first_name)
     user.save!
     user.password_was_set!
 
@@ -24,10 +28,6 @@ InviteRedeemer = Struct.new(:invite, :password) do
   end
 
   private
-
-    def invited_user
-      @invited_user ||= get_invited_user
-    end
 
     def process_invitation
       delete_duplicate_invites

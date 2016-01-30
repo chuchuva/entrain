@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
       @current_site = Site.find_by_subdomain!(request.subdomains.first)
     end
 
+    def set_program
+      @program = @current_site.programs.find(params[:program_id])
+    end
+
     # Confirms a logged-in user.
     def logged_in_user
       unless logged_in?

@@ -1,0 +1,8 @@
+
+<h1>Invite</h1>
+
+<p>This link is valid for <%= @invite.email %>:</p>
+
+<p><%= "#{@base_url}/invites/#{@invite.invite_key}" %></p>
+
+<%= link_to 'Back', admin_program_invites_path(@invite.program_id) %>

@@ -30,17 +30,14 @@ Rails.application.routes.draw do
       resources :texts
       resources :emails, as: 'email_templates', controller: 'email_templates'
       resources :coupons
+      resources :invites
     end
     resources :settings
     
-    get :invite, to: 'send_invite#new'
-    post :invite, to: 'send_invite#sendit'
-
     get 'test-email', to: 'test_email#new'
     post 'test-email', to: 'test_email#send_email'
   end
-  resources :invites
-  get 'admin/invites/show/:id' => 'invites#show_admin'
+  resources :invites, only: [:show, :update]
   get ':program_slug/:page_slug/:id', to: 'pages#show', as: :page
 
   # The priority is based upon order of creation: first created -> highest priority.

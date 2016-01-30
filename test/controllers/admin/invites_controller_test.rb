@@ -1,44 +1,46 @@
 require 'test_helper'
 
-class InvitesControllerTest < ActionController::TestCase
+class Admin::InvitesControllerTest < ActionController::TestCase
   setup do
+    @program = programs(:one)
     @invite = invites(:valid)
+    log_in_as(users(:charlie))
   end
 
   test "should get index" do
-    get :index
+    get :index, program_id: @program.id
     assert_response :success
     assert_not_nil assigns(:invites)
   end
 
   test "should get new" do
-    get :new
+    get :new, program_id: @program.id
     assert_response :success
   end
 
   test "should create invite" do
     log_in_as(users(:charlie))
-    assert is_logged_in?, 'User is not logged in'
-    get :new
+    get :new, program_id: @program.id
     assert_difference('Invite.count') do
-      post :create, invite: { email: "test4@example.com" }
+      post :create, program_id: @program.id, invite: { 
+        email: "test4@example.com" }
     end
 
-    assert_redirected_to action: 'show_admin', id: assigns(:invite).id
+    assert_redirected_to admin_program_invites_path(@program)
   end
 
   test "should return error if user already exists" do
-    log_in_as(users(:charlie))
     assert is_logged_in?, 'User is not logged in'
-    get :new
+    get :new, program_id: @program.id
     assert_no_difference('Invite.count') do
-      post :create, invite: { email: "charlie@example.com" }
+      post :create, program_id: @program.id, invite: {
+        email: "charlie@example.com" }
     end
     assert_template 'invites/new'
   end
 
   test "should show invite" do
-    get :show, id: @invite.invite_key
+    get :show, id: @invite.id
     assert_response :success
   end
 
@@ -47,6 +49,6 @@ class InvitesControllerTest < ActionController::TestCase
       delete :destroy, id: @invite
     end
 
-    assert_redirected_to invites_path
+    assert_redirected_to admin_program_invites_path(@program)
   end
 end

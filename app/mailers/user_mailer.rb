@@ -35,17 +35,20 @@ class UserMailer < ActionMailer::Base
     end
   end
 
-  def invite(invite, first_name)
-    program = invite.site.programs.first
-    template = program.email_template(:invite)
-    raise "Invite template not found for program #{program.id}" unless template
+  def invite(invite)
+    template = invite.program.email_template(:invite)
+    url = "https://#{invite.site.subdomain}.entrainhq.com/invites/#{invite.invite_key}"
     if template
-      body = EmailRenderer.render(template.body, 'first_name' => first_name,
-        'url' => "https://#{invite.site.subdomain}.entrainhq.com/invites/#{invite.invite_key}")
+      body = EmailRenderer.render(template.body, 'first_name' => invite.first_name,
+        'url' => url)
       mail(to: invite.email, subject: template.subject) do |format|
         format.html { render text: body[:html] }
         format.text { render text: body[:text] }
       end
+    else
+      @first_name = invite.first_name
+      @url = url
+      mail to: invite.email, subject: "Account activation"
     end
   end
 end

@@ -2,6 +2,7 @@ require_dependency 'email'
 
 class Invite < ActiveRecord::Base
   belongs_to :site
+  belongs_to :program
   include Trashable
 
   belongs_to :user
@@ -43,28 +44,8 @@ class Invite < ActiveRecord::Base
     InviteRedeemer.new(self, password).redeem unless expired? || destroyed? || redeemed?
   end
 
-  # Create an invite for a user
-  #
-  # Return the previously existing invite if already exists. Returns nil if the invite can't be created.
-  def self.invite_by_email(site, email, invited_by)
-    lower_email = Email.downcase(email)
-
-    invite = site.invites.with_deleted
-                   .where(email: lower_email, invited_by_id: invited_by.id)
-                   .order('created_at DESC')
-                   .first
-
-    if invite && (invite.expired? || invite.deleted_at)
-      invite.destroy
-      invite = nil
-    end
-
-    if !invite
-      invite = site.invites.create(invited_by: invited_by, email: lower_email)
-    end
-
-    invite.reload unless invite.new_record?
-    invite
+  def invite_by_email
+    UserMailer.invite(self).deliver
   end
 
 end

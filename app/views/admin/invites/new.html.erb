@@ -1,0 +1,28 @@
+<h1>Send Invite</h1>
+
+<%= form_for([:admin, @program, @invite]) do |f| %>
+  <% if @invite.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@invite.errors.count, "error") %> prohibited this invite from being sent:</h2>
+
+      <ul>
+      <% @invite.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name, class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= submit_tag("Send Invite") %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', admin_program_invites_path %>

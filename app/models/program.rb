@@ -4,6 +4,7 @@ class Program < ActiveRecord::Base
   has_many :texts
   has_many :email_templates
   has_many :coupons
+  has_many :invites
   has_many :orders
   has_many :program_participants, -> { where active: true }
   has_many :users, through: :program_participants
