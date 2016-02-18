@@ -61,12 +61,12 @@
           </div>
         </div>
       </div>
-      <div>
+      <!-- <div>
         <%= f.radio_button :pay_method, :paypal %>
         <%= f.label :pay_method_paypal, image_tag(
           "https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png",
           alt: "PayPal") %>
-      </div>
+      </div> -->
       <% if @current_site.setting(:bank_transfer_enabled) %>
         <div>
           <%= f.radio_button :pay_method, :bank_transfer %>
