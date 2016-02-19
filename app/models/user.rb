@@ -68,9 +68,9 @@ class User < ActiveRecord::Base
     update_attributes(password_set: true, password_set_at: Time.zone.now)
   end
 
-  # Sends activation email.
-  def send_activation_email(program)
-    UserMailer.account_activation(self, program).deliver
+  # Sends welcome email.
+  def send_welcome_email(program)
+    UserMailer.welcome(self, program).deliver
   end
 
   # Sets the password reset attributes.

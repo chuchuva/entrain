@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @user = @current_site.users.build(user_params)
     @user.password = SecureRandom.base64
     if @user.save
-      @user.send_activation_email nil
+      @user.send_welcome_email nil
       flash[:info] = "Please check your email to activate your account."
       redirect_to login_url
     else

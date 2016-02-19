@@ -3,19 +3,19 @@ require_dependency 'email_renderer'
 class UserMailer < ActionMailer::Base
   default from: "noreply@entrainhq.com"
 
-  def account_activation(user, program)
-    template = program ? program.email_template(:account_activation) : nil
+  def welcome(user, program)
+    @url = user.password_set ? program_url(program) :
+      edit_account_activation_url(user.activation_token, email: user.email)
+    template = program ? program.email_template(:welcome) : nil
     if template
-      body = EmailRenderer.render(template.body,
-        'activation_url' => edit_account_activation_url(user.activation_token,
-                                                        email: user.email))
+      body = EmailRenderer.render(template.body, 'url' => @url)
       mail(to: user.email, subject: template.subject) do |format|
         format.html { render text: body[:html] }
         format.text { render text: body[:text] }
       end
     else
       @user = user
-      mail to: user.email, subject: "Account activation"
+      mail to: user.email, subject: "Welcome to the program"
     end
   end
 

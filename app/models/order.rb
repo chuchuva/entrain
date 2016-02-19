@@ -17,8 +17,8 @@ class Order < ActiveRecord::Base
         user.email = email
         user.password = SecureRandom.base64
         return false unless user.save
-        user.send_activation_email(program)
       end
+      user.send_welcome_email(program)
       program.add_user(user)
     else
       UserMailer.bank_transfer_instructions(self).deliver

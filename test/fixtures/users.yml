@@ -20,6 +20,15 @@ stew:
   auth_token: <%= SecureRandom.hex(16) %>
   admin: false
 
+neo:
+  site: site1
+  name: Neo Newbie
+  email: neo@example.com
+  password_digest: <%= User.digest('password') %>
+  password_set: false
+  auth_token: <%= SecureRandom.hex(16) %>
+  admin: false
+
 another_coach:
   site: anothersite
   name: Another Coach
