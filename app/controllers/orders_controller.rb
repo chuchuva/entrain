@@ -54,7 +54,7 @@ before_action :set_locale
     customer = nil
     if params[:instalment].present?
       customer = Stripe::Customer.create(
-        :email => params[:email],
+        :email => @order.email,
         :description => @order.first_name + " " + @order.last_name,
         :source => params[:stripeToken]
       )
