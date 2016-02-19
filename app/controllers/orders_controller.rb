@@ -32,6 +32,10 @@ before_action :set_locale
       render :new
       return
     end
+
+    if params[:instalment].present?
+      @order.amount = params[:instalment]
+    end
     
     if @order.pay_method && @order.pay_method.to_sym == :bank_transfer &&
        @current_site.setting(:bank_transfer_enabled)
@@ -46,8 +50,18 @@ before_action :set_locale
     end
 
     Stripe.api_key = @current_site.setting(:stripe_secret_key)
+
+    customer = nil
+    if params[:instalment].present?
+      customer = Stripe::Customer.create(
+        :email => params[:email],
+        :description => @order.first_name + " " + @order.last_name,
+        :source => params[:stripeToken]
+      )
+    end
     charge = Stripe::Charge.create(
-      :source      => params[:stripeToken],
+      :customer    => customer ? customer[:id] : nil,
+      :source      => customer ? nil : params[:stripeToken],
       :amount      => (@order.amount * 100).to_i, # Stripe expects cents
       :description => @program.name,
       :currency    => @current_site.currency
