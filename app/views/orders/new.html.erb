@@ -26,33 +26,33 @@
         <div style="font-size:120%">
           <% if params[:code].present? && @price < @program.price %>
             <div>
-              <%= radio_button_tag :instalment, '', true %>
-              <%= label_tag :instalment_,
+              <%= radio_button_tag :installment, '', true %>
+              <%= label_tag :installment_,
                   'Einmalzahlung von € 6.500 anstatt € 7.200' %>
             </div>
             <div>
-              <%= radio_button_tag :instalment, 2200 %>
-              <%= label_tag :instalment_2200,
+              <%= radio_button_tag :installment, 2200 %>
+              <%= label_tag :installment_2200,
                   'in 3 Raten von € 2.200 ( 01.03./ 01.06./01.09.2016)' %>
             </div>
             <div>
-              <%= radio_button_tag :instalment, 750 %>
-              <%= label_tag :instalment_750, 'monatliche Beiträge von € 750' %>
+              <%= radio_button_tag :installment, 750 %>
+              <%= label_tag :installment_750, 'monatliche Beiträge von € 750' %>
             </div>
           <% else %>
             <div>
-              <%= radio_button_tag :instalment, '', true %>
-              <%= label_tag :instalment_,
+              <%= radio_button_tag :installment, '', true %>
+              <%= label_tag :installment_,
                   'Einmalzahlung von € 6.800 anstatt € 7.200' %>
             </div>
             <div>
-              <%= radio_button_tag :instalment, 2350 %>
-              <%= label_tag :instalment_2350,
+              <%= radio_button_tag :installment, 2350 %>
+              <%= label_tag :installment_2350,
                   'in 3 Raten von € 2.350 ( 01.03./ 01.06./01.09.2016)' %>
             </div>
             <div>
-              <%= radio_button_tag :instalment, 790 %>
-              <%= label_tag :instalment_790, 'monatliche Beiträge von € 790' %>
+              <%= radio_button_tag :installment, 790 %>
+              <%= label_tag :installment_790, 'monatliche Beiträge von € 790' %>
             </div>
           <% end %>
           <p></p><hr><p></p><p></p>

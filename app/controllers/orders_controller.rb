@@ -33,8 +33,8 @@ before_action :set_locale
       return
     end
 
-    if params[:instalment].present?
-      @order.amount = params[:instalment]
+    if params[:installment].present?
+      @order.amount = params[:installment]
     end
     
     if @order.pay_method && @order.pay_method.to_sym == :bank_transfer &&
@@ -52,7 +52,7 @@ before_action :set_locale
     Stripe.api_key = @current_site.setting(:stripe_secret_key)
 
     customer = nil
-    if params[:instalment].present?
+    if params[:installment].present?
       customer = Stripe::Customer.create(
         :email => @order.email,
         :description => @order.first_name + " " + @order.last_name,
