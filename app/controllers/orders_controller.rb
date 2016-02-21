@@ -5,12 +5,14 @@ class OrdersController < ApplicationController
 before_action :set_locale
  
   def new
-    @custom_css = @current_site.setting(:custom_css)
-    @program = @current_site.programs.find(params[:program_id])
-    @price = @program.apply_coupon(params[:code])
-    @sales_text = @program.text(:sales)
+    setup_new
     @order = @current_site.orders.build
-    @order.program = @program;
+    @order.program = @program
+
+    if @installment_plans.present?
+      @order.installment_plan_id = @installment_plans.first.id
+    end
+
     @order.pay_method = :card;
     if @current_site.subdomain == "stashahealthcatalyst"
       render "new-stasha"
@@ -18,12 +20,10 @@ before_action :set_locale
   end
 
   def create
-    @program = @current_site.programs.find(params[:program_id])
-    @price = @program.apply_coupon(params[:code])
-    @sales_text = @program.text(:sales)
+    setup_new
     @order = @current_site.orders.build(order_params)
-    @order.program = @program;
-    @order.amount = @program.apply_coupon(params[:code]);
+    @order.amount = @price;
+    @order.program = @program
     if params[:stripeEmail]
       @order.email = params[:stripeEmail]
     end
@@ -33,8 +33,8 @@ before_action :set_locale
       return
     end
 
-    if params[:installment].present?
-      @order.amount = params[:installment]
+    if @order.installment_plan
+      @order.amount = @order.installment_plan.first_payment
     end
     
     if @order.pay_method && @order.pay_method.to_sym == :bank_transfer &&
@@ -52,7 +52,7 @@ before_action :set_locale
     Stripe.api_key = @current_site.setting(:stripe_secret_key)
 
     customer = nil
-    if params[:installment].present?
+    if @order.installment_plan && @order.installment_plan.first_payment < @price
       customer = Stripe::Customer.create(
         :email => @order.email,
         :description => @order.first_name + " " + @order.last_name,
@@ -152,8 +152,19 @@ before_action :set_locale
   end
 
   private
+    def setup_new
+      @custom_css = @current_site.setting(:custom_css)
+      @program = @current_site.programs.find(params[:program_id])
+      @coupon = @program.check_coupon(params[:code])
+      @installment_plans = @program.installment_plans.where(
+        coupon_id: @coupon).order(first_payment: :desc)
+      @price = @program.apply_coupon(@coupon)
+      @sales_text = @program.text(:sales)
+    end
+
     def order_params
-      params.require(:order).permit(:first_name, :last_name, :email, :pay_method)
+      params.require(:order).permit(:first_name, :last_name, :email,
+        :pay_method, :installment_plan_id)
     end
     
     def set_locale

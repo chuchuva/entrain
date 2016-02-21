@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First payment:</strong>
+  <%= @installment_plan.first_payment %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @installment_plan.description %>
+</p>
+<p>
+  <strong>Coupon:</strong>
+  <%= @installment_plan.coupon ? @installment_plan.coupon.code : '' %>
+</p>
+
+<%= link_to 'Edit', edit_admin_installment_plan_path(@installment_plan) %> |
+<%= link_to 'Back', admin_program_installment_plans_path(@installment_plan.program_id) %>

@@ -12,3 +12,10 @@ de:
     submit:
       order:
         create: "Weiter"
+  activerecord:
+    errors:
+      models:
+        order:
+          attributes:
+            email:
+              blank: "ist erforderlich"

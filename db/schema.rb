@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160130113637) do
+ActiveRecord::Schema.define(version: 20160220071906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,19 @@ ActiveRecord::Schema.define(version: 20160130113637) do
 
   add_index "email_templates", ["program_id"], name: "index_email_templates_on_program_id", using: :btree
 
+  create_table "installment_plans", force: true do |t|
+    t.integer  "site_id"
+    t.integer  "program_id"
+    t.decimal  "first_payment"
+    t.text     "description"
+    t.integer  "coupon_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "installment_plans", ["program_id"], name: "index_installment_plans_on_program_id", using: :btree
+  add_index "installment_plans", ["site_id"], name: "index_installment_plans_on_site_id", using: :btree
+
   create_table "invites", force: true do |t|
     t.string   "invite_key",    limit: 32, null: false
     t.string   "email",                    null: false
@@ -64,10 +77,11 @@ ActiveRecord::Schema.define(version: 20160130113637) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.decimal  "amount",     precision: 15, scale: 2
+    t.decimal  "amount",              precision: 15, scale: 2
     t.string   "pay_method"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "installment_plan_id"
   end
 
   create_table "pages", force: true do |t|

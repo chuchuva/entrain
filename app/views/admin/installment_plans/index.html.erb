@@ -1,0 +1,32 @@
+<h1>Installment Plans</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>First Payment</th>
+      <th>Description</th>
+      <th>Coupon</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @installment_plans.each do |installment_plan| %>
+      <tr>
+        <td><%= installment_plan.first_payment %></td>
+        <td><%= installment_plan.description %></td>
+        <td><%= installment_plan.coupon ? installment_plan.coupon.code : '' %></td>
+        <td><%= link_to 'Show', [:admin, installment_plan] %></td>
+        <td><%= link_to 'Edit', edit_admin_installment_plan_path(installment_plan) %></td>
+        <td>
+          <%= link_to 'Delete', [:admin, installment_plan], method: :delete,
+                      data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New installment plan', new_admin_program_installment_plan_path %>

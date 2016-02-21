@@ -22,43 +22,15 @@
       <%= render 'shared/error_messages', object: f.object %>
       <div class="payment-errors alert-danger"></div>
 
-      <% if @program.id == 1 || @program.id == 7 %>
+      <% if @installment_plans.present? %>
         <div style="font-size:120%">
-          <% if params[:code].present? && @price < @program.price %>
-            <div>
-              <%= radio_button_tag :installment, '', true %>
-              <%= label_tag :installment_,
-                  'Einmalzahlung von € 6.500 anstatt € 7.200' %>
-            </div>
-            <div>
-              <%= radio_button_tag :installment, 2200 %>
-              <%= label_tag :installment_2200,
-                  'in 3 Raten von € 2.200 ( 01.03./ 01.06./01.09.2016)' %>
-            </div>
-            <div>
-              <%= radio_button_tag :installment, 750 %>
-              <%= label_tag :installment_750, 'monatliche Beiträge von € 750' %>
-            </div>
-          <% else %>
-            <div>
-              <%= radio_button_tag :installment, '', true %>
-              <%= label_tag :installment_,
-                  'Einmalzahlung von € 6.800 anstatt € 7.200' %>
-            </div>
-            <div>
-              <%= radio_button_tag :installment, 2350 %>
-              <%= label_tag :installment_2350,
-                  'in 3 Raten von € 2.350 ( 01.03./ 01.06./01.09.2016)' %>
-            </div>
-            <div>
-              <%= radio_button_tag :installment, 790 %>
-              <%= label_tag :installment_790, 'monatliche Beiträge von € 790' %>
-            </div>
+          <%= f.collection_radio_buttons :installment_plan_id,
+              @installment_plans, :id, :description do |b| %>
+            <div><%= b.radio_button %> <%= b.label %></div>
           <% end %>
           <p></p><hr><p></p><p></p>
         </div>
       <% end %>
-
 
       <%= f.label :first_name %>
       <%= f.text_field :first_name, class: 'form-control' %>
@@ -99,13 +71,13 @@
           </div>
         </div>
       </div>
-      <% if @program.id != 7 %>
-      <div>
-        <%= f.radio_button :pay_method, :paypal %>
-        <%= f.label :pay_method_paypal, image_tag(
-          "https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png",
-          alt: "PayPal") %>
-      </div>
+      <% if @installment_plans.empty? %>
+        <div>
+          <%= f.radio_button :pay_method, :paypal %>
+          <%= f.label :pay_method_paypal, image_tag(
+            "https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png",
+            alt: "PayPal") %>
+        </div>
       <% end %>
       <% if @current_site.setting(:bank_transfer_enabled) %>
         <div>

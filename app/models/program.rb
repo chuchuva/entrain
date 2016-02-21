@@ -5,6 +5,7 @@ class Program < ActiveRecord::Base
   has_many :email_templates
   has_many :coupons
   has_many :invites
+  has_many :installment_plans
   has_many :orders
   has_many :program_participants, -> { where active: true }
   has_many :users, through: :program_participants
@@ -18,9 +19,12 @@ class Program < ActiveRecord::Base
     text = email_templates.find_by(email_type: email_type)
   end
 
-  def apply_coupon(code)
-    return price if code.blank?
-    coupon = coupons.find_by(code: code)
+  def check_coupon(code)
+    return nil if code.blank?
+    coupons.find_by(code: code)
+  end
+
+  def apply_coupon(coupon)
     coupon ? coupon.price : price
   end
 

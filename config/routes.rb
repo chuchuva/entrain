@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       resources :texts
       resources :emails, as: 'email_templates', controller: 'email_templates'
       resources :coupons
+      resources :installment_plans
       resources :invites
     end
     resources :settings

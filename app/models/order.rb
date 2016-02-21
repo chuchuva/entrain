@@ -2,6 +2,7 @@ class Order < ActiveRecord::Base
   belongs_to :site
   belongs_to :program
   belongs_to :user
+  belongs_to :installment_plan
   validates :email, presence: true, uniqueness: { scope: :program_id, message:
     'taken. Oops, it looks like you have purchased this program already. ' + 
     'Please contact us for assistance with getting access to the program.'}
