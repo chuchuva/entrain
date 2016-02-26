@@ -23,7 +23,16 @@ class AccessSiteTest < ActionDispatch::IntegrationTest
     assert_template 'pages/show'
     assert_select "h1", {count: 0, text: "No Access"}
 
+    get program_module_path(program_slug: 'a', id: program_modules(:one))
+    assert_template 'program_modules/show'
+    assert_select "h1", {count: 0, text: "No Access"}
+    assert_select "video"
+
     get program_path(programs(:two))
+    assert_template 'programs/no_access'
+    assert_select "h1", "No Access"
+
+    get program_module_path(program_slug: 'a', id: program_modules(:module_from_program2))
     assert_template 'programs/no_access'
     assert_select "h1", "No Access"
 
@@ -38,5 +47,6 @@ class AccessSiteTest < ActionDispatch::IntegrationTest
     get admin_programs_path
     assert_template 'admin/programs/index'
     assert_select "h1", "Listing programs"
+
   end
 end

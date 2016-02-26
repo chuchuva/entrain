@@ -19,6 +19,9 @@ gem 'liquid'
 gem 'activemerchant'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
+gem 'aws-sdk' # S3 API
+gem 's3_direct_upload' # direct upload form helper and assets
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass'

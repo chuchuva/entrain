@@ -1,0 +1,22 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  site: site1
+  program: one
+  title: MyString
+  content: MyText
+  video_url: MyString
+
+two:
+  site: site1
+  program: one
+  title: MyString
+  content: MyText
+  video_url: MyString
+
+module_from_program2:
+  site: site1
+  program: two
+  title: MyString
+  content: MyText
+  video_url: MyString
