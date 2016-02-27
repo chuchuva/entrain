@@ -14,4 +14,8 @@ module ApplicationHelper
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true)
     markdown.render(text).html_safe
   end  
+
+  def bootstrap_class_for flash_type
+    flash_type.to_sym == :notice ? "alert-success" : "alert-#{flash_type}"
+  end
 end
