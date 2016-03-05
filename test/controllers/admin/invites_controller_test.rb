@@ -34,7 +34,7 @@ class Admin::InvitesControllerTest < ActionController::TestCase
     get :new, program_id: @program.id
     assert_no_difference('Invite.count') do
       post :create, program_id: @program.id, invite: {
-        email: "charlie@example.com" }
+        email: "stew@example.com" }
     end
     assert_template 'invites/new'
   end
