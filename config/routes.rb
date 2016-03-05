@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       resources :coupons
       resources :installment_plans
       resources :invites
+      resources :modules, as: 'program_modules', controller: 'program_modules'
     end
     resources :settings
     
@@ -39,6 +40,7 @@ Rails.application.routes.draw do
     post 'test-email', to: 'test_email#send_email'
   end
   resources :invites, only: [:show, :update]
+  get ':program_slug/modules/:id', to: 'program_modules#show', as: :program_module
   get ':program_slug/:page_slug/:id', to: 'pages#show', as: :page
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,16 @@
+<% if @custom_css %>
+  <link href="<%= @custom_css %>" rel="stylesheet" type="text/css">
+<% end %>
+
+<ol class="breadcrumb">
+  <li><%= link_to "Program", @program_module.program %></li>
+  <li class="active">Module</li>
+</ol>
+
+<h1><%= @program_module.title %></h1>
+
+<video src="<%= @program_module.video_url %>" width="960" controls>
+  Sorry, your browser doesn't support embedded videos.
+</video>
+
+<%= markdown @program_module.content %>

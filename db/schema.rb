@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220071906) do
+ActiveRecord::Schema.define(version: 20160225202921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,19 @@ ActiveRecord::Schema.define(version: 20160220071906) do
   end
 
   add_index "pages", ["site_id"], name: "index_pages_on_site_id", using: :btree
+
+  create_table "program_modules", force: true do |t|
+    t.integer  "site_id"
+    t.integer  "program_id"
+    t.string   "title"
+    t.text     "content"
+    t.string   "video_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "program_modules", ["program_id"], name: "index_program_modules_on_program_id", using: :btree
+  add_index "program_modules", ["site_id"], name: "index_program_modules_on_site_id", using: :btree
 
   create_table "program_participants", force: true do |t|
     t.integer  "site_id"

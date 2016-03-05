@@ -1,0 +1,29 @@
+<h1>Module</h1>
+
+<%= form_for([:admin, @program, @program_module]) do |f| %>
+  <% if @program_module.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@program_module.errors.count, "error") %> prohibited this module from being saved:</h2>
+
+      <ul>
+      <% @program_module.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_area :content, size: "80x20", class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save", class: "btn btn-primary" %>
+    <%= link_to 'Cancel', admin_program_program_modules_path(@program_module.program_id) %>
+  </div>
+<% end %>
+

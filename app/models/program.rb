@@ -7,6 +7,7 @@ class Program < ActiveRecord::Base
   has_many :invites
   has_many :installment_plans
   has_many :orders
+  has_many :program_modules
   has_many :program_participants, -> { where active: true }
   has_many :users, through: :program_participants
 

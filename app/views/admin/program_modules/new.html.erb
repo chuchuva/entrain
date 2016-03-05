@@ -1,0 +1,39 @@
+<h1>New Module</h1>
+
+<%= s3_uploader_form callback_url: admin_program_program_modules_path,
+                     id: "s3_uploader",
+                     callback_param: "program_module[video_url]",
+                     key_starts_with: @current_site.subdomain + "/",
+                     max_file_size: 50.gigabytes,
+                     expiration: 24.hours.from_now.utc.iso8601 do %>
+  <%= file_field_tag :file, multiple: false %>
+<% end %>
+<div id="uploads_container"></div>
+
+<script id="template-upload" type="text/x-tmpl">
+<div id="upload_{%=o.unique_id%}" class="upload">
+  <h5>{%=o.name%}</h5>
+  <div class="progress progress-striped active"><div class="bar" style="width: 0%"></div></div>
+</div>
+</script>
+<script>
+$(function() {
+  $('#s3_uploader').S3Uploader(
+    { 
+      remove_completed_progress_bar: false,
+      progress_bar_target: $('#uploads_container'),
+      before_add: function(file) {
+        if (!(/\.mp4$/i).test(file.name)) {
+          alert('Please select .mp4 file only');
+          return false;
+        } else {
+          return true;
+        }
+      }
+    }
+  );
+  $('#s3_uploader').bind('s3_upload_failed', function(e, content) {
+    return alert(content.filename + ' failed to upload');
+  });
+});
+</script>
