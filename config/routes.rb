@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     
     get 'test-email', to: 'test_email#new'
     post 'test-email', to: 'test_email#send_email'
+    get 'test-error', to: 'test#error'
   end
   resources :invites, only: [:show, :update]
   get ':program_slug/modules/:id', to: 'program_modules#show', as: :program_module
