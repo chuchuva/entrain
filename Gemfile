@@ -48,7 +48,6 @@ gem 'spring',        group: :development
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem "sentry-raven"
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
@@ -60,5 +59,5 @@ end
 
 group :production do
   gem 'rails_12factor', '0.0.2'
+  gem "sentry-raven"
 end
-  

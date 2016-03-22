@@ -49,7 +49,9 @@ class ApplicationController < ActionController::Base
     end
 
     def set_raven_context
-      Raven.user_context(user_id: current_user.email) if current_user
-      Raven.extra_context(params: params.to_hash, url: request.url)
+      if defined?(Raven)
+        Raven.user_context(user_id: current_user.email) if current_user
+        Raven.extra_context(params: params.to_hash, url: request.url)
+      end
     end
 end
