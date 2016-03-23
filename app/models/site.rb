@@ -10,6 +10,7 @@ class Site < ActiveRecord::Base
   has_many :orders
   has_many :coupons
   has_many :site_settings
+  has_many :uploads
 
   def setting(name)
     setting = site_settings.find_by(name: name)

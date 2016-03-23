@@ -10,6 +10,7 @@ class Program < ActiveRecord::Base
   has_many :program_modules
   has_many :program_participants, -> { where active: true }
   has_many :users, through: :program_participants
+  has_many :uploads
 
   def text(text_type)
     text = texts.find_by(text_type: text_type)

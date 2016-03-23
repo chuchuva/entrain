@@ -1,0 +1,8 @@
+<ul>
+  <% @uploads.each do |upload| %>
+    <li><%= link_to upload.file_name, [:admin, upload] %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Upload', new_admin_program_upload_path,
+      class: 'btn btn-primary' %>

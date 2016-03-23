@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       resources :installment_plans
       resources :invites
       resources :modules, as: 'program_modules', controller: 'program_modules'
+      resources :uploads
     end
     resources :settings
     

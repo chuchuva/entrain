@@ -5,6 +5,7 @@
     <%= nav_link 'Content', admin_program_path(@program), "programs" %>
     <%= nav_link 'Modules', admin_program_program_modules_path(@program),
           "program_modules" %>
+    <%= nav_link 'Media', admin_program_uploads_path(@program), "uploads" %>
   </ul>
   <%= yield %>
 <% end %>

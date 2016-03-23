@@ -1,0 +1,5 @@
+<% if @upload.persisted? %>
+  window.location.href = "<%= admin_upload_path(@upload) %>";
+<% else %>
+  $('#upload_<%=params[:unique_id]%> div.progress').removeClass('active progress-striped').addClass('progress-danger');
+<% end %>
