@@ -1,6 +1,6 @@
 <h1>Module</h1>
 
-<%= form_for([:admin, @program, @program_module]) do |f| %>
+<%= form_for([:admin, @program_module]) do |f| %>
   <% if @program_module.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@program_module.errors.count, "error") %> prohibited this module from being saved:</h2>

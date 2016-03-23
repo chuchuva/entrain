@@ -35,7 +35,7 @@
   <% flash.each do |message_type, message| %>
     <div class="alert <%= bootstrap_class_for(message_type) %>"><%= message %></div>
   <% end %>
-  <%= yield %>
+  <%= content_for?(:content) ? yield(:content) : yield %>
 </div>
 
 </body>

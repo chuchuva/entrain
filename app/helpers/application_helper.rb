@@ -18,4 +18,11 @@ module ApplicationHelper
   def bootstrap_class_for flash_type
     flash_type.to_sym == :notice ? "alert-success" : "alert-#{flash_type}"
   end
+
+  def nav_link(body, url, c, html_options = {})
+    active = "active" if c == controller_name
+    content_tag :li, class: active, role: "presentation"  do
+      link_to body, url, html_options
+    end
+  end
 end

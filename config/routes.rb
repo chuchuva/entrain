@@ -25,6 +25,7 @@ Rails.application.routes.draw do
             to: 'orders#bank_transfer_instructions', as: :bank_transfer_instructions
 
   namespace :admin do
+    root 'programs#index'
     resources :programs, shallow: true do
       resources :pages
       resources :texts

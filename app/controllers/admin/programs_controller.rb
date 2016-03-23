@@ -1,5 +1,6 @@
 class Admin::ProgramsController < Admin::AdminController
   before_action :set_program, only: [:show, :edit, :update, :destroy]
+  layout "admin", except: [:index, :new]
 
   # GET admin/programs
   def index

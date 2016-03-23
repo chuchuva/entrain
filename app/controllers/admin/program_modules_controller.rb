@@ -53,6 +53,7 @@ class Admin::ProgramModulesController < Admin::AdminController
 
     def set_program_module
       @program_module = @current_site.program_modules.find(params[:id])
+      @program = @program_module.program
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
