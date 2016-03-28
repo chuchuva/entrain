@@ -1,0 +1,11 @@
+<h1><%= @program_module.title %></h1>
+
+URL:<br>
+<code style="display:block; margin-bottom: 1em"><%= program_module_path(
+  program_slug: @program.slug, id: @program_module.id) %></code>
+
+<pre><%= @program_module.content %></pre>
+
+<%= link_to 'Edit', edit_admin_program_module_path(@program_module) %> |
+<%= link_to 'Delete', [:admin, @program_module],
+      method: :delete, data: { confirm: 'Are you sure?' } %>

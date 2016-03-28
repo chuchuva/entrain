@@ -1,6 +1,7 @@
 <ul>
   <% @program_modules.each do |program_module| %>
-    <li><%= link_to program_module.title.presence || 'Module', edit_admin_program_module_path(program_module) %></li>
+    <li><%= link_to program_module.title.presence || 'Module',
+              [:admin, program_module] %></li>
   <% end %>
 </ul>
 

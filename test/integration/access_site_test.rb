@@ -26,7 +26,7 @@ class AccessSiteTest < ActionDispatch::IntegrationTest
     get program_module_path(program_slug: 'a', id: program_modules(:one))
     assert_template 'program_modules/show'
     assert_select "h1", {count: 0, text: "No Access"}
-    assert_select "video"
+    assert_select "h1", "Module 1 from Program 1 Site 1"
 
     get program_path(programs(:two))
     assert_template 'programs/no_access'

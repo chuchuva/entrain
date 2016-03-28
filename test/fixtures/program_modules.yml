@@ -3,20 +3,17 @@
 one:
   site: site1
   program: one
-  title: MyString
-  content: MyText
-  video_url: MyString
+  title: Module 1 from Program 1 Site 1
+  content: Module one content
 
 two:
   site: site1
   program: one
   title: MyString
   content: MyText
-  video_url: MyString
 
 module_from_program2:
   site: site1
   program: two
   title: MyString
   content: MyText
-  video_url: MyString

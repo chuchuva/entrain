@@ -1,5 +1,0 @@
-<% if @program_module.persisted? %>
-  window.location.href = "<%= edit_admin_program_module_path(@program_module) %>";
-<% else %>
-  $('#upload_<%=params[:unique_id]%> div.progress').removeClass('active progress-striped').addClass('progress-danger');
-<% end %>

@@ -24,13 +24,17 @@ class Admin::ProgramModulesController < Admin::AdminController
   def create
     @program_module = @program.program_modules.build(program_module_params)
     @program_module.site_id = @program.site_id
-    @program_module.save
+    if @program_module.save
+      redirect_to [:admin, @program_module], notice: 'Module was successfully created.'
+    else
+      render :new
+    end
   end
 
   # PATCH/PUT /admin/program_modules/1
   def update
     if @program_module.update(program_module_params)
-      redirect_to admin_program_program_modules_url(@program_module.program),
+      redirect_to [:admin, @program_module],
         notice: 'Module was successfully updated.'
     else
       render :edit
@@ -54,6 +58,6 @@ class Admin::ProgramModulesController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def program_module_params
-      params.require(:program_module).permit(:video_url, :title, :content)
+      params.require(:program_module).permit(:title, :content)
     end
 end
