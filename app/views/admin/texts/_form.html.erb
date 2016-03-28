@@ -1,4 +1,4 @@
-<%= form_for([:admin, @program, @text]) do |f| %>
+<%= form_for([:admin, @text.new_record? ? @program : nil, @text]) do |f| %>
   <% if @text.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@text.errors.count, "error") %> prohibited this text from being saved:</h2>

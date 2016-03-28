@@ -51,12 +51,9 @@ class Admin::TextsController < Admin::AdminController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_program
-      @program = @current_site.programs.find(params[:program_id])
-    end
-
     def set_text
       @text = @current_site.texts.find(params[:id])
+      @program = @text.program
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

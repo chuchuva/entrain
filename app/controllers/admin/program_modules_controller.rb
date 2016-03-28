@@ -47,10 +47,6 @@ class Admin::ProgramModulesController < Admin::AdminController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_program
-      @program = @current_site.programs.find(params[:program_id])
-    end
-
     def set_program_module
       @program_module = @current_site.program_modules.find(params[:id])
       @program = @program_module.program

@@ -1,4 +1,4 @@
-<%= form_for([:admin, @program, @email_template]) do |f| %>
+<%= form_for([:admin, @email_template.new_record? ? @program : nil, @email_template]) do |f| %>
   <% if @email_template.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@email_template.errors.count, "error") %> prohibited this email template from being saved:</h2>

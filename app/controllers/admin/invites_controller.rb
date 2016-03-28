@@ -53,6 +53,7 @@ class Admin::InvitesController < Admin::AdminController
   private
     def set_invite
       @invite = @current_site.invites.find(params[:id])
+      @program = @invite.program
     end
 
     def invite_params

@@ -46,7 +46,7 @@ class AccessSiteTest < ActionDispatch::IntegrationTest
     log_in_as(users(:charlie))
     get admin_programs_path
     assert_template 'admin/programs/index'
-    assert_select "h1", "Listing programs"
+    assert_select "h1", "Programs"
 
   end
 end

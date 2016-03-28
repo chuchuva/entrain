@@ -49,10 +49,6 @@ class Admin::UploadsController < Admin::AdminController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_program
-      @program = @current_site.programs.find(params[:program_id])
-    end
-
     def set_upload
       @upload = @current_site.uploads.find(params[:id])
       @program = @upload.program

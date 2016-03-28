@@ -1,4 +1,5 @@
-<%= form_for([:admin, @program, @installment_plan]) do |f| %>
+<%= form_for([:admin, @installment_plan.new_record? ? @program : nil,
+      @installment_plan]) do |f| %>
   <% if @installment_plan.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@installment_plan.errors.count, "error") %> prohibited this installment plan from being saved:</h2>

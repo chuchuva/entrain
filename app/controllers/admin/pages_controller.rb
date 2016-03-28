@@ -35,7 +35,7 @@ class Admin::PagesController < Admin::AdminController
   # PATCH/PUT /admin/pages/1
   def update
     if @page.update(page_params)
-      redirect_to [:admin, @program, @page], notice: 'Page was successfully updated.'
+      redirect_to [:admin, @page], notice: 'Page was successfully updated.'
     else
       render :edit
     end
@@ -51,12 +51,9 @@ class Admin::PagesController < Admin::AdminController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_program
-      @program = @current_site.programs.find(params[:program_id])
-    end
-
     def set_page
       @page = @current_site.pages.find(params[:id])
+      @program = @page.program
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
