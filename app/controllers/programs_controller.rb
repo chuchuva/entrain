@@ -1,11 +1,11 @@
 class ProgramsController < ApplicationController
   before_action :logged_in_user
   def index
-    program = current_user.programs.first
-    if program 
-      redirect_to program
-    else
-      render :no_access
+    @programs = current_user.programs
+    if @programs.empty?
+      render :no_access and return
+    elsif @programs.count == 1
+      redirect_to @programs.first and return
     end
   end
 

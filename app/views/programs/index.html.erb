@@ -1,2 +1,9 @@
 <h1>Welcome</h1>
-<p>List of programs goes here.</p>
+
+<p>You have access to these programs:</p>
+
+<ul>
+  <% @programs.each do |program| %>
+    <li><%= link_to program.name, program %></li>
+  <% end %>
+</ul>
