@@ -60,11 +60,14 @@ before_action :set_locale
       )
     end
     charge = Stripe::Charge.create(
-      :customer    => customer ? customer[:id] : nil,
-      :source      => customer ? nil : params[:stripeToken],
-      :amount      => (@order.amount * 100).to_i, # Stripe expects cents
-      :description => @program.name,
-      :currency    => @current_site.currency
+      :customer      => customer ? customer[:id] : nil,
+      :source        => customer ? nil : params[:stripeToken],
+      :amount        => (@order.amount * 100).to_i, # Stripe expects cents
+      :description   => 
+        "Purchase of #{@program.name} by #{@order.first_name} #{@order.last_name} <#{@order.email}>",
+      :currency      => @current_site.currency,
+      :receipt_email => @order.email,
+      :metadata      => {'email' => @order.email}
     )
     @order.submit!
     redirect_to thank_you_path
