@@ -11,8 +11,8 @@
   <div class="container">
     <% if site_logo_url.present? %>
       <div class="navbar-header">
-        <%= link_to image_tag(site_logo_url), @program || "/", 
-              class: "navbar-brand" %>
+        <%= link_to image_tag(site_logo_url), @program.present? && 
+              @program.persisted? ? @program : "/", class: "navbar-brand" %>
       </div>
     <% end %>
     <nav>

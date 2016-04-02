@@ -13,3 +13,7 @@ bank_setting:
   name: bank_transfer_enabled
   value: true
 
+logo_setting:
+  site: site1
+  name: logo_url
+  value: '/logo.jpg'
