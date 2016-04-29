@@ -17,12 +17,25 @@
     <%= f.label :title %><br>
     <%= f.text_field :title, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content, size: "80x20", class: "form-control" %>
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a id="write-tab" href="#write" role="tab" data-toggle="tab" aria-controls="write" aria-expanded="true">Write</a>
+    </li>
+    <li role="presentation">
+      <a id="preview-tab" href="#preview" role="tab"data-toggle="tab" aria-controls="preview" aria-expanded="false">Preview</a>
+    </li>
+  </ul>
+
+  <div class="tab-content editor">
+    <div role="tabpanel" class="tab-pane active" id="write" aria-labelledby="write-tab">
+      <%= f.text_area :content, size: "80x20", class: "form-control" %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="preview" aria-labelledby="preview-tab">
+    </div>
   </div>
+
   <div class="actions">
-    <%= f.submit "Save", class: "btn btn-primary" %>
+    <%= f.submit "Update this module", class: "btn btn-primary" %>
     <%= link_to 'Cancel', admin_program_program_modules_path(@program_module.program_id) %>
   </div>
 <% end %>
