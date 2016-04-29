@@ -11,8 +11,7 @@ module ApplicationHelper
   def liquid(template, context)
     return nil if template.blank?
     text = Liquid::Template.parse(template).render(context)
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true)
-    markdown.render(text).html_safe
+    markdown(text)
   end  
 
   def bootstrap_class_for flash_type
