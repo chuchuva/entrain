@@ -1,6 +1,6 @@
 class Admin::SettingsController < Admin::AdminController
   before_action :set_setting, only: [:show, :edit, :update, :destroy]
-  layout "application"
+  layout "admin"
 
   # GET admin/settings
   def index

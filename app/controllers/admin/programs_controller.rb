@@ -1,10 +1,10 @@
 class Admin::ProgramsController < Admin::AdminController
   before_action :set_program, only: [:show, :edit, :update, :destroy]
-  layout "admin", except: [:index, :new]
 
   # GET admin/programs
   def index
     @programs = @current_site.programs
+    render layout: "admin"
   end
 
   # GET admin/programs/1
@@ -14,6 +14,7 @@ class Admin::ProgramsController < Admin::AdminController
   # GET /programs/new
   def new
     @program = @current_site.programs.build
+    render layout: "admin"
   end
 
   # GET /programs/1/edit
@@ -27,7 +28,7 @@ class Admin::ProgramsController < Admin::AdminController
     if @program.save
       redirect_to [:admin, @program], notice: 'Program was successfully created.'
     else
-      render :new
+      render :new, layout: "admin"
     end
   end
 
