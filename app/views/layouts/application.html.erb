@@ -18,6 +18,12 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
+        <% if current_user && current_user.admin? %>
+          <li>
+            <%= link_to "Admin", @program.present? && 
+              @program.persisted? ? [:admin, @program] : admin_root_path %>
+          </li>
+        <% end %>
         <% if logged_in? %>
           <li>
             <%= link_to "Sign out", logout_path, method: "delete" %>

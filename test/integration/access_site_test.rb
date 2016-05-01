@@ -49,4 +49,17 @@ class AccessSiteTest < ActionDispatch::IntegrationTest
     assert_select "h1", "Programs"
 
   end
+
+  test "admin link in header should be visible to admins only" do
+    assert_not is_logged_in?
+    get login_url
+    assert_select "a", {count: 0, text: "Admin"}
+    log_in_as(users(:stew))
+    get program_path(@program)
+    assert_select "a", {count: 0, text: "Admin"}
+    log_in_as(users(:charlie))
+    get program_path(@program)
+    assert_select "a", "Admin"
+  end
+
 end
