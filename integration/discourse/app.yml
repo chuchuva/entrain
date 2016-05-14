@@ -50,7 +50,7 @@ env:
   ## TODO: Postgresql password
   DISCOURSE_DB_PASSWORD: 
   DISCOURSE_DB_NAME: discourse_playground
-  DISCOURSE_REDIS_HOST: 172.17.42.1
+  DISCOURSE_REDIS_HOST: 172.17.0.1
   DISCOURSE_REDIS_DB: 1
 
   ## TODO: List of comma delimited emails that will be made admin and developer
